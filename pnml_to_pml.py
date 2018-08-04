@@ -84,7 +84,7 @@ for transition in parsed_transition_elements:
             ('name', transition[1])
         ])
 
-""" arc_dict = {'source'.value:{'id'; 'target'; 'marking'}} """
+""" arc_dict = {'source'.value:{'id'; 'target'; 'marking':token count}} """
 for arc in parsed_arc_elements:
     arc_dict[arc[1]] = dict(
             [
