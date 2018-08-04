@@ -70,8 +70,9 @@ parsed_arc_elements = [
         raw_arc_elements[i].attrib['source'],
         raw_arc_elements[i].attrib['target'],
         [j.find('{RefNet}text').text
-            if raw_arc_elements[i].find('{RefNet}inscription') is not None
-            else 1 for j in raw_arc_elements[i].find('{RefNet}inscription')]
+        if j.find('{RefNet}text') is not None
+        else 1 
+        for j in raw_arc_elements[i].findall('{RefNet}inscription')]
 
     )
     for i in range(0, len(raw_arc_elements))]
@@ -89,7 +90,7 @@ for arc in parsed_arc_elements:
             [
                 ('id', arc[0]),
                 ('target', arc[2]),
-                ('marking', arc[3])
+                ('marking', len(arc[3]))
             ])
 
 """ place_dict = {'id'.value:{'name'; 'marking'}} """
