@@ -69,12 +69,10 @@ parsed_arc_elements = [
         raw_arc_elements[i].attrib['id'],
         raw_arc_elements[i].attrib['source'],
         raw_arc_elements[i].attrib['target'],
-        (
-            raw_arc_elements[i].find('{RefNet}inscription').
-            find('{RefNet}text').text
+        [j.find('{RefNet}text').text
             if raw_arc_elements[i].find('{RefNet}inscription') is not None
-            else 1
-        )
+            else 1 for j in raw_arc_elements[i].find('{RefNet}inscription')]
+
     )
     for i in range(0, len(raw_arc_elements))]
 
