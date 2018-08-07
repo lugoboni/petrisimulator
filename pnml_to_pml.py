@@ -47,14 +47,14 @@ parsed_transition_elements = [
 
 raw_place_elements = list(root.iter(PLACE_TAG_MODEL_STRING))
 
-""" parsed_place_elements =	list of tuples:
+""" parsed_place_elements = list of tuples:
                (id, name, initialMarking{value|None}) """
 parsed_place_elements = [
     (
         raw_place_elements[i].attrib['id'],
         raw_place_elements[i].find('{RefNet}name').find('{RefNet}text').text,
-        raw_place_elements[i].find(
-            '{RefNet}initialMarking').find('{RefNet}text').text
+        len(raw_place_elements[i].findall(
+            '{RefNet}initialMarking'))
         if raw_place_elements[i].find('{RefNet}initialMarking') is not None
         else None
     )
@@ -70,18 +70,21 @@ parsed_arc_elements = [
         raw_arc_elements[i].attrib['source'],
         raw_arc_elements[i].attrib['target'],
         [j.find('{RefNet}text').text
-        if j.find('{RefNet}text') is not None
-        else 1 
-        for j in raw_arc_elements[i].findall('{RefNet}inscription')]
+         if j.find('{RefNet}text') is not None
+         else 1
+         for j in raw_arc_elements[i].findall('{RefNet}inscription')]
 
     )
     for i in range(0, len(raw_arc_elements))]
 
-""" transition_dict = {'id'.value:{'name':value}} """
+""" transition_dict = {'id'.value:{'name':value; matrix_id}}} """
+i = -1
 for transition in parsed_transition_elements:
+    i += 1
     transition_dict[transition[0]] = dict(
         [
-            ('name', transition[1])
+            ('name', transition[1]),
+            ('matrix_index', i)
         ])
 
 """ arc_dict = {'source'.value:{'id'; 'target'; 'marking':token count}} """
@@ -93,12 +96,15 @@ for arc in parsed_arc_elements:
                 ('marking', len(arc[3]))
             ])
 
-""" place_dict = {'id'.value:{'name'; 'marking'}} """
+""" place_dict = {'id'.value:{'name'; 'marking'; matrix_id}} """
+i = -1
 for place in parsed_place_elements:
+    i += 1
     place_dict[place[0]] = dict(
         [
             ('name', place[1]),
-            ('marking', place[2])
+            ('marking', place[2]),
+            ('matrix_index', i)
         ])
 
 
@@ -111,18 +117,16 @@ base_col = [0 for i in range(0, place_col_value)]
 pre_matrix = [list(base_col) for i in range(0, transition_rows_value)]
 post_matrix = [list(base_col) for i in range(0, transition_rows_value)]
 
-i = 0
 for transition in transition_dict:
-    j = 0
     for place in place_dict:
         if place in arc_dict.keys():
             if arc_dict[place]['target'] == transition:
-                pre_matrix[i][j] = arc_dict[place]['marking']
+                pre_matrix[transition_dict[transition]['matrix_index']
+                           ][place_dict[place]['matrix_index']] = arc_dict[place]['marking']
         if transition in arc_dict.keys():
             if arc_dict[transition]['target'] == place:
-                post_matrix[i][j] = arc_dict[transition]['marking']
-        j = j + 1
-    i = i + 1
+                post_matrix[transition_dict[transition]['matrix_index']
+                            ][place_dict[place]['matrix_index']] = arc_dict[transition]['marking']
 
 
 # creating promela structures
@@ -130,7 +134,7 @@ f = open(OUTPUT_FILENAME, "w")
 f.write("#define R {}\n".format(transition_rows_value))
 f.write("#define C {}\n".format(place_col_value))
 f.write("typedef VECTOR {\n")
-f.write("	byte vector[C];\n")
+f.write("   byte vector[C];\n")
 f.write("};\n")
 f.write("VECTOR pre_matrix[R];\n")
 f.write("VECTOR post_matrix[R];\n")
@@ -138,12 +142,12 @@ f.write("init {\n")
 
 for i in range(0, transition_rows_value):
     for j in range(0, place_col_value):
-        f.write("	pre_matrix[{}].vector[{}] = {};\n".format(
+        f.write("   pre_matrix[{}].vector[{}] = {};\n".format(
             i, j, pre_matrix[i][j]))
 
 for i in range(0, transition_rows_value):
     for j in range(0, place_col_value):
-        f.write("	post_matrix[{}].vector[{}] = {};\n".format(
+        f.write("   post_matrix[{}].vector[{}] = {};\n".format(
             i, j, post_matrix[i][j]))
 f.write("}\n")
 
