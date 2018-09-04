@@ -56,7 +56,7 @@ parsed_place_elements = [
         len(raw_place_elements[i].findall(
             '{RefNet}initialMarking'))
         if raw_place_elements[i].find('{RefNet}initialMarking') is not None
-        else 0
+        else None
     )
     for i in range(0, len(raw_place_elements))]
 
@@ -77,103 +77,78 @@ parsed_arc_elements = [
     )
     for i in range(0, len(raw_arc_elements))]
 
-place_to_transition = dict()
 """ transition_dict = {'id'.value:{'name':value; matrix_id}}} """
+i = -1
 for transition in parsed_transition_elements:
+    i += 1
     transition_dict[transition[0]] = dict(
         [
             ('name', transition[1]),
+            ('matrix_index', i)
         ])
-    place_to_transition[transition[0]] = []
+
 """ arc_dict = {'source'.value:{'id'; 'target'; 'marking':token count}} """
 for arc in parsed_arc_elements:
-    if arc[1] in arc_dict.keys():
-        arc_dict[arc[1]].append(dict(
-                [
-                    ('id', arc[0]),
-                    ('target', arc[2]),
-                    ('marking', len(arc[3]))
-                ])
-        )
-
-    else:
-        arc_dict[arc[1]] = [dict(
-                [
-                    ('id', arc[0]),
-                    ('target', arc[2]),
-                    ('marking', len(arc[3]))
-                ])]
+    arc_dict[arc[1]] = dict(
+            [
+                ('id', arc[0]),
+                ('target', arc[2]),
+                ('marking', len(arc[3]))
+            ])
 
 """ place_dict = {'id'.value:{'name'; 'marking'; matrix_id}} """
+i = -1
 for place in parsed_place_elements:
+    i += 1
     place_dict[place[0]] = dict(
         [
             ('name', place[1]),
             ('marking', place[2]),
+            ('matrix_index', i)
         ])
 
 
-def get_arc_by_target(target):
-    out = list()
-    for arc_key in arc_dict.keys():
-        for arc in arc_dict[arc_key]:
-            if arc['target'] == target:
-                out.append((arc_key, arc))
-    return out
+""" building pre_matrix post matrix """
+transition_rows_value = len(transition_dict)
+place_col_value = len(place_dict)
 
+base_col = [0 for i in range(0, place_col_value)]
 
+pre_matrix = [list(base_col) for i in range(0, transition_rows_value)]
+post_matrix = [list(base_col) for i in range(0, transition_rows_value)]
 
-fire_conditions = list()
-for transition_key in transition_dict.keys():
-    fire_t = dict({'cost': [], 'fire': [], 'name' : transition_dict[transition_key]['name']})
-    arcs_with_target_transition = get_arc_by_target(transition_key)
-    for arc in arcs_with_target_transition:
-        fs = "p" + str(place_dict[arc[0]]['name']) + \
-            " >= " + str(arc[1]['marking'])
-        name = "p" + str(place_dict[arc[0]]['name'])
-        cs = name + " = " + name + \
-            " - " + str(arc[1]['marking'])
-        fire_t['cost'].append((fs, cs))
-    for arc in arc_dict[transition_key]:
-        name = "p"+str(place_dict[arc['target']]['name'])
-        ds =  name +" = " + name + " + " + str(arc['marking'])
-        fire_t['fire'].append(ds)
-    fire_conditions.append(fire_t)
+for transition in transition_dict:
+    for place in place_dict:
+        if place in arc_dict.keys():
+            if arc_dict[place]['target'] == transition:
+                pre_matrix[transition_dict[transition]['matrix_index']
+                           ][place_dict[place]['matrix_index']] = arc_dict[place]['marking']
+        if transition in arc_dict.keys():
+            if arc_dict[transition]['target'] == place:
+                post_matrix[transition_dict[transition]['matrix_index']
+                            ][place_dict[place]['matrix_index']] = arc_dict[transition]['marking']
 
-def create_fire_sentences_strings():
-    sentences = list()
-    for condition in fire_conditions:
-        stout = "::atomic{"
-        stcondition = ""
-        stoperation = ""
-        while len(condition['cost']) > 0:
-            popped_cost = condition['cost'].pop()
-            stcondition += popped_cost[0]
-            stoperation += popped_cost[1] +"; "
-            if len(condition['cost']) > 0:
-                stcondition += " && "
-        stout += stcondition +" -> "+ stoperation
-
-        for statement in condition['fire']:
-            stout = stout + statement + "; "
-
-        stout = stout + "printf(\"Firing {}\\n\");".format(condition['name']) + "}"
-        sentences.append(stout)
-    return sentences
 
 # creating promela structures
 f = open(OUTPUT_FILENAME, "w")
-f.write("active proctype P() {\n")
-for key in place_dict.keys():
-    f.write("byte p{} = {};\n".format(place_dict[key]['name'], place_dict[key]['marking']))
+f.write("#define R {}\n".format(transition_rows_value))
+f.write("#define C {}\n".format(place_col_value))
+f.write("typedef VECTOR {\n")
+f.write("   byte vector[C];\n")
+f.write("};\n")
+f.write("VECTOR pre_matrix[R];\n")
+f.write("VECTOR post_matrix[R];\n")
+f.write("init {\n")
 
+for i in range(0, transition_rows_value):
+    for j in range(0, place_col_value):
+        f.write("   pre_matrix[{}].vector[{}] = {};\n".format(
+            i, j, pre_matrix[i][j]))
 
-lines_to_copy = create_fire_sentences_strings()
-f.write("do{}\n".format(lines_to_copy.pop()))
-for line in lines_to_copy:
-    f.write("  {}\n".format(line))
-f.write("od")
-
+for i in range(0, transition_rows_value):
+    for j in range(0, place_col_value):
+        f.write("   post_matrix[{}].vector[{}] = {};\n".format(
+            i, j, post_matrix[i][j]))
 f.write("}\n")
 
 
