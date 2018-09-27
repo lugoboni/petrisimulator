@@ -136,18 +136,24 @@ def define_fire_conditions():
             {'cost': [], 'fire': [], 'name': transition_dict[transition_key]['name']})
         arcs_with_target_transition = get_arc_by_target(transition_key)
         for arc in arcs_with_target_transition:
-            fs = "p" + str(place_dict[arc[0]]['name']) + \
-                " >= " + str(arc[1]['marking'])
-            name = "p" + str(place_dict[arc[0]]['name'])
-            cs = name + " = " + name + \
-                " - " + str(arc[1]['marking'])
-            fire_t['cost'].append((fs, cs))
-        if transition_key in arc_dict.keys():
-            for arc in arc_dict[transition_key]:
-                name = "p" + str(place_dict[arc['target']]['name'])
-                ds = name + " = " + name + " + " + str(arc['marking'])
-                fire_t['fire'].append(ds)
-            fire_conditions.append(fire_t)
+            if arc[1]['marking'] > 0:
+                fs = "p" + str(place_dict[arc[0]]['name']) + \
+                    " >= " + str(arc[1]['marking'])
+                name = "p" + str(place_dict[arc[0]]['name'])
+                cs = name + " = " + name + \
+                    " - " + str(arc[1]['marking'])
+                fire_t['cost'].append((fs, cs))
+            else:
+                pass
+        if len(fire_t['cost']) > 0:
+            if transition_key in arc_dict.keys():
+                for arc in arc_dict[transition_key]:
+                    name = "p" + str(place_dict[arc['target']]['name'])
+                    ds = name + " = " + name + " + " + str(arc['marking'])
+                    fire_t['fire'].append(ds)
+                fire_conditions.append(fire_t)
+        else:
+            pass
 
 
 def print_places_status():
