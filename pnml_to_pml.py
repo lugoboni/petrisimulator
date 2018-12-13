@@ -14,9 +14,17 @@ ARC_TAG_MODEL_STRING = '{RefNet}arc'
 fire_conditions = list()
 
 
+def extract_feature(thing, feature):
+    feature_string = '{RefNet}' + feature
+    if thing.find(feature_string):
+        return thing.find(feature_string).find('{RefNet}text').text
+    else:
+        return None
+
+
 def init():
 
-    INPUT_FILE = str(sys.argv[1])
+    INPUT_FILE = 'SN.pnml'
     splited_filename = INPUT_FILE.split('.')
 
     if len(splited_filename) < 2:
@@ -45,7 +53,7 @@ def parse_transitions():
         (
             raw_transition_elements[i].attrib['id'],
             raw_transition_elements[i].find(
-                '{RefNet}name').find('{RefNet}text').text
+                '{RefNet}name').find('{RefNet}text').text,
         )
         for i in range(0, len(raw_transition_elements))]
 

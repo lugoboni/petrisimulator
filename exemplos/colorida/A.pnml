@@ -1,0 +1,143 @@
+<pnml xmlns="RefNet">
+   <net id="netId1540491559830" type="RefNet">
+      <place id="110">
+         <initialMarking>
+            <graphics>
+               <offset x="0" y="0"/>
+            </graphics>
+            <text>[]</text>
+         </initialMarking>
+         <name>
+            <graphics>
+               <offset x="-2" y="-19"/>
+            </graphics>
+            <text>pa1</text>
+         </name>
+         <graphics>
+            <position x="94" y="231"/>
+            <dimension x="83" y="83"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <place id="111">
+         <name>
+            <graphics>
+               <offset x="0" y="-19"/>
+            </graphics>
+            <text>pa2</text>
+         </name>
+         <graphics>
+            <position x="442" y="228"/>
+            <dimension x="83" y="83"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <transition id="112">
+         <uplink>
+            <graphics>
+               <offset x="1" y="-81"/>
+            </graphics>
+            <text>:a_ch()</text>
+         </uplink>
+         <graphics>
+            <position x="270" y="230"/>
+            <dimension x="23" y="128"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="113" source="110" target="112">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="114" source="112" target="111">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <transition id="119">
+         <downlink>
+            <graphics>
+               <offset x="1" y="75"/>
+            </graphics>
+            <text>thing: b_hor()</text>
+         </downlink>
+         <graphics>
+            <position x="270" y="380"/>
+            <dimension x="23" y="128"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <transition id="120">
+         <uplink>
+            <graphics>
+               <offset x="-4" y="-31"/>
+            </graphics>
+            <text>: a_receive(thing)</text>
+         </uplink>
+         <graphics>
+            <position x="93" y="100"/>
+            <dimension x="117" y="22"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="121" source="120" target="110">
+         <inscription>
+            <graphics>
+               <offset x="0" y="0"/>
+            </graphics>
+            <text>thing</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="125" source="110" target="119">
+         <inscription>
+            <graphics>
+               <offset x="0" y="0"/>
+            </graphics>
+            <text>thing</text>
+         </inscription>
+         <type>
+            <text>both</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <place id="127">
+         <graphics>
+            <position x="444" y="378"/>
+            <dimension x="83" y="83"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <arc id="129" source="119" target="127">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <name>
+         <text>A</text>
+      </name>
+   </net>
+</pnml>
