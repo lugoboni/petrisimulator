@@ -514,29 +514,6 @@ def define_fire_actions(fire_conditions, arc_dict, place_dict, net_name):
     return fire_actions
 
 
-
-def create_fire_sentences_strings(fire_conditions):
-    sentences = list()
-    for condition in fire_conditions:
-        stout = "::atomic{"
-        stcondition = ""
-        stoperation = ""
-        while len(condition['cost']) > 0:
-            popped_cost = condition['cost'].pop()
-            stcondition += popped_cost[0]
-            stoperation += popped_cost[1] + "; "
-            if len(condition['cost']) > 0:
-                stcondition += " && "
-        stout += stcondition + " -> " + stoperation
-
-        for statement in condition['fire']:
-            stout = stout + statement + "; "
-
-        stout = stout + "printf(\"\\nFiring {} ->  {});".format(
-            condition['name'], print_places_status()) + "}"
-        sentences.append(stout)
-    return sentences
-
 def create_initial_marking(place_dict):
     initial_marking = list()
     for key in place_dict:
