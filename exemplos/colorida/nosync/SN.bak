@@ -1,5 +1,5 @@
 11 
-    de.renew.gui.CPNDrawing 26 
+    de.renew.gui.CPNDrawing 25 
         de.renew.gui.PlaceFigure "attributes" "attributes" 3 "FigureWithID" "Int" 97 "FrameColor" "Color" 0 0 0 255 "FillColor" "Color" 112 219 147 255 58 176 56 52 NULL  
         de.renew.gui.PlaceFigure "attributes" "attributes" 3 "FigureWithID" "Int" 98 "FrameColor" "Color" 0 0 0 255 "FillColor" "Color" 112 219 147 255 384 189 56 52 NULL  
         de.renew.gui.PlaceFigure "attributes" "attributes" 3 "FigureWithID" "Int" 99 "FrameColor" "Color" 0 0 0 255 "FillColor" "Color" 112 219 147 255 454 55 56 52 NULL  
@@ -67,7 +67,4 @@
                 CH.ifa.draw.standard.RelativeLocator 0.5 0.5   1  
         de.renew.gui.CPNTextFigure "attributes" "attributes" 4 "TextAlignment" "Int" 1 "FigureWithID" "Int" 121 "FrameColor" "Color" 255 199 158 255 "FillColor" "Color" 255 199 158 255 309 243 "b" "SansSerif" 0 12 0 REF 22 
             CH.ifa.draw.standard.OffsetLocator 0 15 
-                CH.ifa.draw.standard.RelativeLocator 0.5 0.5   1  
-        de.renew.gui.CPNTextFigure "attributes" "attributes" 4 "TextAlignment" "Int" 1 "FigureWithID" "Int" 122 "FrameColor" "Color" 255 199 158 255 "FillColor" "Color" 255 199 158 255 113 132 "a: a_receive(b)" "SansSerif" 0 12 0 REF 27 
-            CH.ifa.draw.standard.OffsetLocator 73 20 
                 CH.ifa.draw.standard.RelativeLocator 0.5 0.5   1  NULL  637 227 598 600 

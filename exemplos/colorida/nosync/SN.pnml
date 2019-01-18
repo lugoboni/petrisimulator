@@ -1,6 +1,12 @@
 <pnml xmlns="RefNet">
-   <net id="netId1544725680590" type="RefNet">
+   <net id="netId1547153410747" type="RefNet">
       <place id="97">
+         <name>
+            <graphics>
+               <offset x="0" y="0"/>
+            </graphics>
+            <text>SN1</text>
+         </name>
          <graphics>
             <position x="86" y="202"/>
             <dimension x="56" y="52"/>
@@ -9,6 +15,12 @@
          </graphics>
       </place>
       <place id="98">
+         <name>
+            <graphics>
+               <offset x="0" y="0"/>
+            </graphics>
+            <text>SN2</text>
+         </name>
          <graphics>
             <position x="412" y="215"/>
             <dimension x="56" y="52"/>
@@ -17,8 +29,40 @@
          </graphics>
       </place>
       <place id="99">
+         <name>
+            <graphics>
+               <offset x="0" y="0"/>
+            </graphics>
+            <text>SN3</text>
+         </name>
          <graphics>
             <position x="482" y="81"/>
+            <dimension x="56" y="52"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <place id="107">
+         <initialMarking>
+            <graphics>
+               <offset x="0" y="0"/>
+            </graphics>
+            <text>[]</text>
+         </initialMarking>
+         <initialMarking>
+            <graphics>
+               <offset x="0" y="0"/>
+            </graphics>
+            <text>[]</text>
+         </initialMarking>
+         <name>
+            <graphics>
+               <offset x="0" y="0"/>
+            </graphics>
+            <text>SN0</text>
+         </name>
+         <graphics>
+            <position x="86" y="32"/>
             <dimension x="56" y="52"/>
             <fill color="rgb(112,219,147)"/>
             <line color="rgb(0,0,0)"/>
@@ -48,6 +92,26 @@
          <graphics>
             <position x="231" y="252"/>
             <dimension x="19" y="64"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <transition id="108">
+         <create>
+            <graphics>
+               <offset x="68" y="-15"/>
+            </graphics>
+            <text>a: new A</text>
+         </create>
+         <create>
+            <graphics>
+               <offset x="68" y="2"/>
+            </graphics>
+            <text>b: new B</text>
+         </create>
+         <graphics>
+            <position x="86" y="119"/>
+            <dimension x="63" y="20"/>
             <fill color="rgb(112,219,147)"/>
             <line color="rgb(0,0,0)"/>
          </graphics>
@@ -116,40 +180,6 @@
             <line color="rgb(0,0,0)" style="solid"/>
          </graphics>
       </arc>
-      <place id="107">
-         <initialMarking>
-            <graphics>
-               <offset x="0" y="0"/>
-            </graphics>
-            <text>[]</text>
-         </initialMarking>
-         <graphics>
-            <position x="86" y="32"/>
-            <dimension x="56" y="52"/>
-            <fill color="rgb(112,219,147)"/>
-            <line color="rgb(0,0,0)"/>
-         </graphics>
-      </place>
-      <transition id="108">
-         <create>
-            <graphics>
-               <offset x="68" y="-15"/>
-            </graphics>
-            <text>a: new A</text>
-         </create>
-         <create>
-            <graphics>
-               <offset x="68" y="2"/>
-            </graphics>
-            <text>b: new B</text>
-         </create>
-         <graphics>
-            <position x="86" y="119"/>
-            <dimension x="63" y="20"/>
-            <fill color="rgb(112,219,147)"/>
-            <line color="rgb(0,0,0)"/>
-         </graphics>
-      </transition>
       <arc id="109" source="107" target="108">
          <type>
             <text>ordinary</text>

@@ -1,0 +1,71 @@
+<pnml xmlns="RefNet">
+   <net id="netId1545237323883" type="RefNet">
+      <place id="110">
+         <initialMarking>
+            <graphics>
+               <offset x="0" y="0"/>
+            </graphics>
+            <text>[]</text>
+         </initialMarking>
+         <name>
+            <graphics>
+               <offset x="-2" y="-19"/>
+            </graphics>
+            <text>pa1</text>
+         </name>
+         <graphics>
+            <position x="94" y="231"/>
+            <dimension x="83" y="83"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <place id="111">
+         <name>
+            <graphics>
+               <offset x="0" y="-19"/>
+            </graphics>
+            <text>pa2</text>
+         </name>
+         <graphics>
+            <position x="442" y="228"/>
+            <dimension x="83" y="83"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <transition id="112">
+         <uplink>
+            <graphics>
+               <offset x="1" y="-81"/>
+            </graphics>
+            <text>:a_ch()</text>
+         </uplink>
+         <graphics>
+            <position x="270" y="230"/>
+            <dimension x="23" y="128"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="113" source="110" target="112">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="114" source="112" target="111">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <name>
+         <text>A</text>
+      </name>
+   </net>
+</pnml>
