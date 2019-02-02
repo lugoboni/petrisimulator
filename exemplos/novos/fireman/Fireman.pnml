@@ -1,0 +1,341 @@
+<pnml xmlns="RefNet">
+   <net id="netId1547925576030" type="RefNet">
+      <transition id="1">
+         <create>
+            <graphics>
+               <offset x="59" y="-6"/>
+            </graphics>
+            <text>b: new Bucket</text>
+         </create>
+         <uplink>
+            <graphics>
+               <offset x="-35" y="-1"/>
+            </graphics>
+            <text>:new()</text>
+         </uplink>
+         <graphics>
+            <position x="166" y="184"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <place id="3">
+         <graphics>
+            <position x="299" y="238"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <arc id="4" source="1" target="3">
+         <inscription>
+            <graphics>
+               <offset x="12" y="-2"/>
+            </graphics>
+            <text>b</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <transition id="8">
+         <uplink>
+            <graphics>
+               <offset x="-60" y="1"/>
+            </graphics>
+            <text>:exchange(be,bf)</text>
+         </uplink>
+         <graphics>
+            <position x="299" y="312"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="9" source="3" target="8">
+         <inscription>
+            <graphics>
+               <offset x="-7" y="-7"/>
+            </graphics>
+            <text>be</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <place id="10">
+         <graphics>
+            <position x="299" y="394"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <arc id="11" source="8" target="10">
+         <inscription>
+            <graphics>
+               <offset x="-12" y="1"/>
+            </graphics>
+            <text>bf</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <transition id="12">
+         <uplink>
+            <graphics>
+               <offset x="58" y="1"/>
+            </graphics>
+            <text>:exchange(bf,be)</text>
+         </uplink>
+         <graphics>
+            <position x="359" y="311"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="13" source="37" target="12">
+         <inscription>
+            <graphics>
+               <offset x="9" y="6"/>
+            </graphics>
+            <text>bf</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="14" source="12" target="38">
+         <inscription>
+            <graphics>
+               <offset x="15" y="3"/>
+            </graphics>
+            <text>be</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <transition id="21">
+         <uplink>
+            <graphics>
+               <offset x="65" y="1"/>
+            </graphics>
+            <text>:approachFire()</text>
+         </uplink>
+         <graphics>
+            <position x="330" y="461"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <transition id="23">
+         <uplink>
+            <graphics>
+               <offset x="42" y="-1"/>
+            </graphics>
+            <text>:retreat()</text>
+         </uplink>
+         <graphics>
+            <position x="332" y="184"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <transition id="25">
+         <downlink>
+            <graphics>
+               <offset x="-33" y="9"/>
+            </graphics>
+            <text>b:fill()</text>
+         </downlink>
+         <uplink>
+            <graphics>
+               <offset x="-32" y="-9"/>
+            </graphics>
+            <text>:refill()</text>
+         </uplink>
+         <graphics>
+            <position x="166" y="313"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="27" source="25" target="10">
+         <inscription>
+            <graphics>
+               <offset x="-53" y="-9"/>
+            </graphics>
+            <text>b</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <position x="165" y="394"/>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <transition id="30">
+         <uplink>
+            <graphics>
+               <offset x="49" y="-8"/>
+            </graphics>
+            <text>:extinguish()</text>
+         </uplink>
+         <downlink>
+            <graphics>
+               <offset x="43" y="9"/>
+            </graphics>
+            <text>b:empty()</text>
+         </downlink>
+         <graphics>
+            <position x="498" y="314"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="31" source="37" target="30">
+         <inscription>
+            <graphics>
+               <offset x="56" y="-2"/>
+            </graphics>
+            <text>b</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <position x="498" y="391"/>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="32" source="30" target="38">
+         <inscription>
+            <graphics>
+               <offset x="56" y="11"/>
+            </graphics>
+            <text>b</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <position x="497" y="241"/>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <place id="37">
+         <graphics>
+            <position x="359" y="391"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <place id="38">
+         <graphics>
+            <position x="358" y="241"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <arc id="39" source="10" target="21">
+         <inscription>
+            <graphics>
+               <offset x="-10" y="0"/>
+            </graphics>
+            <text>b</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="40" source="21" target="37">
+         <inscription>
+            <graphics>
+               <offset x="12" y="2"/>
+            </graphics>
+            <text>b</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="43" source="3" target="25">
+         <inscription>
+            <graphics>
+               <offset x="-50" y="10"/>
+            </graphics>
+            <text>b</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <position x="166" y="238"/>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="44" source="23" target="3">
+         <inscription>
+            <graphics>
+               <offset x="-6" y="-4"/>
+            </graphics>
+            <text>b</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="45" source="38" target="23">
+         <inscription>
+            <graphics>
+               <offset x="6" y="-6"/>
+            </graphics>
+            <text>b</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <name>
+         <text>Fireman</text>
+      </name>
+   </net>
+</pnml>

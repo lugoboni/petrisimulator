@@ -115,6 +115,7 @@ def plug_nets_names_with_token_names(transition_dict):
             for instance in transition_dict[transition]['create']:
                 token_name = instance.split(':')[0]
                 net_name = instance.split(' ')[-1]
+                net_name = net_name.split('()')[0]
                 nets_info[net_name]['tokens'].append(token_name)
                 if token_name in net_tokens_list.keys():
                     net_tokens_list[token_name].add(net_name)
@@ -141,7 +142,7 @@ def plug_function_name_with_sync_transitions(transition_dict, sync_dict, transit
                     transition_label_dict[transition] = sync_dict[name]['label']
         if transition_dict[transition]['downlink']:
             for downlink in transition_dict[transition]['downlink']:
-                name = downlink.split(" ")[1]
+                name = downlink.split(" ")[1] if " " in downlink else downlink.split(":")[1]
                 if name in sync_dict.keys():
                     sync_dict[name]['transitions'].append(transition)
                     transition_label_dict[transition] = sync_dict[name]['label']
@@ -174,7 +175,6 @@ def init(OUTPUT_FILENAME):
     arc_dicts = dict.fromkeys(nets, 0)
 
     net_label = 1
-
     for net in nets:
         if 'SN' not in net:
             nets_info[net] = dict()
@@ -184,6 +184,7 @@ def init(OUTPUT_FILENAME):
         else:
             nets_info[net] = dict() if net not in nets_info.keys() else None
             nets_info[net]['tokens'] = list()
+        nets_info[net]['id'] = 0
 
     EXTENSIONS = [splited_filename[1]
                   for splited_filename in splited_filenames]
@@ -196,6 +197,8 @@ def init(OUTPUT_FILENAME):
 
     initial_trees = [(ElementTree.parse(INPUT_FILE), INPUT_FILE.split('.')[0])
                      for INPUT_FILE in INPUT_FILES]
+    for tree in initial_trees:
+        nets_info[tree[1]]['id'] = tree[0].find('{RefNet}net').attrib['id']
 
     return ([(initial_tree[0].getroot()[0], initial_tree[1]) for initial_tree in initial_trees],
             OUTPUT_FILENAME,
@@ -204,14 +207,13 @@ def init(OUTPUT_FILENAME):
             arc_dicts,
             BASE_FILENAMES[0])
 
-
 def parse_transitions(root):
     transition_dict = dict()
     raw_transition_elements = list(root[0].iter(TRANSITION_TAG_MODEL_STRING))
 
     parsed_transition_elements = [
         (
-            raw_transition_elements[i].attrib['id'],
+            nets_info[root[1]]['id'] + raw_transition_elements[i].attrib['id'],
             extract_feature(raw_transition_elements[i], 'name'),
             extract_feature(raw_transition_elements[i], 'create'),
             extract_feature(raw_transition_elements[i], 'uplink'),
@@ -238,7 +240,7 @@ def parse_places(root):
 
     parsed_place_elements = [
         [
-            raw_place_elements[i].attrib['id'],
+            nets_info[root[1]]['id'] + raw_place_elements[i].attrib['id'],
             extract_feature(raw_place_elements[i], 'name'),
             extract_feature(raw_place_elements[i], 'initialMarking')
         ]
@@ -280,9 +282,9 @@ def parse_arcs(root):
         return mark_dict
     parsed_arc_elements = [
         (
-            raw_arc_elements[i].attrib['id'],
-            raw_arc_elements[i].attrib['source'],
-            raw_arc_elements[i].attrib['target'],
+            nets_info[root[1]]['id'] + raw_arc_elements[i].attrib['id'],
+            nets_info[root[1]]['id'] + raw_arc_elements[i].attrib['source'],
+            nets_info[root[1]]['id'] + raw_arc_elements[i].attrib['target'],
             make_mark_dict(raw_arc_elements[i])
         )
         for i in range(0, len(raw_arc_elements))]
@@ -353,8 +355,9 @@ def parse_connected_transitions(transition_dicts):
 
 
 def define_fire_conditions(transition_dict, arc_dict, place_dict):
-    fire_conditions = list()
+    fire_conditions = dict()
     for transition_key in transition_dict.keys():
+        fire_conditions[transition_key] = list()
         arcs = get_arc_by_target(transition_key, arc_dict)
         uplink = transition_dict[transition_key]['uplink']
         downlink = transition_dict[transition_key]['downlink']
@@ -364,22 +367,74 @@ def define_fire_conditions(transition_dict, arc_dict, place_dict):
             label = transition_label_dict[transition_key]
         else:
             label = 0
+        if arcs:
+            for arc in arcs:
+                if arc[1]['marking'].keys():
+                    for mark in arc[1]['marking'].keys():
+                        if mark not in net_tokens_list.keys():
+                            origin = place_dict[arc[0]]['name'][0]
+                            condition = origin + " > " + str(arc[1]['marking'][mark])
+                            conditions.append(condition)
 
-        for arc in arcs:
-            if arc[1]['marking'].keys():
-                for mark in arc[1]['marking'].keys():
-                    if mark not in net_tokens_list.keys():
+                        elif mark in net_tokens_list.keys() and arc[0] in channel_places:
+                            if uplink:
+
+                                condition = "!pc ?? [eval(_pid),{0}]".format(label)
+                                conditions.append(condition)
+                                fire_uplink_condition = "gbChan ? _,eval(_pid),{0},pc".format(
+                                    label)
+                                fire_conditions[transition_key].append((
+                                    arc[0],
+                                    uplink,
+                                    downlink,
+                                    create,
+                                    arc[1]['marking'],
+                                    label,
+                                    transition_key,
+                                    fire_uplink_condition))
+
+                            elif downlink:
+                                origin = place_dict[arc[0]]['name'][0]
+
+                                fire_downlink_condition = "empty(gbChan) && {0} ?? [_,{1}]".format(
+                                    origin, label)
+                                fire_conditions[transition_key].append((
+                                    arc[0],
+                                    uplink,
+                                    downlink,
+                                    create,
+                                    arc[1]['marking'],
+                                    label,
+                                    transition_key,
+                                    fire_downlink_condition))
+
+                            else:
+                                fire_condition = "empty(gbChan) && 1" #avaliar
+                                fire_conditions[transition_key].append((
+                                    arc[0],
+                                    uplink,
+                                    downlink,
+                                    create,
+                                    arc[1]['marking'],
+                                    label,
+                                    transition_key,
+                                    fire_condition))                            
+
+                        else:
+                            raise Exception(NON_PROCESSED_TOKEN)
+                else:
+                    if arc[0] not in channel_places:
                         origin = place_dict[arc[0]]['name'][0]
-                        condition = origin + " > " + str(arc['marking'][mark])
+                        condition = origin + " > " + '0'
                         conditions.append(condition)
-                    elif mark in net_tokens_list.keys():
-                        if uplink:
 
-                            condition = "!pc ?? [eval(_pid),{0}]".format(label)
+                    else:
+                        if uplink:
+                            condition = "empty(gbChan) && !pc ?? [eval(_pid),{0}]".format(label)
                             conditions.append(condition)
                             fire_uplink_condition = "gbChan ? _,eval(_pid),{0},pc".format(
                                 label)
-                            fire_conditions.append((
+                            fire_conditions[transition_key].append((
                                 arc[0],
                                 uplink,
                                 downlink,
@@ -388,128 +443,127 @@ def define_fire_conditions(transition_dict, arc_dict, place_dict):
                                 label,
                                 transition_key,
                                 fire_uplink_condition))
+
                         elif downlink:
                             origin = place_dict[arc[0]]['name'][0]
 
                             condition = "empty(gbChan) && {0} ?? [_,{1}]".format(
                                 origin, label)
                             conditions.append(condition)
+
                         else:
-                            raise Exception(NON_PROCESSED_NET_TOKEN)
-                    else:
-                        raise Exception(NON_PROCESSED_TOKEN)
-            else:
-                if arc[0] not in channel_places:
-                    origin = place_dict[arc[0]]['name'][0]
-                    condition = origin + " > " + '0'
-                    conditions.append(condition)
+                            fire_condition = "empty(gbChan) && 1" #avaliar
+                            fire_conditions[transition_key].append((
+                                arc[0],
+                                uplink,
+                                downlink,
+                                create,
+                                arc[1]['marking'],
+                                label,
+                                transition_key,
+                                fire_condition))   
 
-                if uplink:
+        else: #If there's no arc inciding on the transition
+            fire_uplink_condition = "1"
+            fire_conditions[transition_key].append((
+                None,
+                uplink,
+                downlink,
+                create,
+                None,
+                label,
+                transition_key,
+                fire_uplink_condition)) 
 
-                    condition = "empty(gbChan) && !pc ?? [eval(_pid),{0}]".format(label)
-                    conditions.append(condition)
-                    fire_uplink_condition = "gbChan ? _,eval(_pid),{0},pc".format(
-                        label)
-                    fire_conditions.append((
-                        arc[0],
-                        uplink,
-                        downlink,
-                        create,
-                        arc[1]['marking'],
-                        label,
-                        transition_key,
-                        fire_uplink_condition))
-                elif downlink:
-                    origin = place_dict[arc[0]]['name'][0]
-
-                    condition = "empty(gbChan) && {0} ?? [_,{1}]".format(
-                        origin, label)
-                    conditions.append(condition)
-                else:
-                    conditions.append("empty(gbChan)")
         fire_condition = ""
         for condition in conditions:
             if condition == conditions[-1]:
                 fire_condition = fire_condition + condition
             else:
                 fire_condition = fire_condition + condition + " && "
-        fire_conditions.append((
-            arc[0],
+        fire_conditions[transition_key].append((
+            None,
             uplink,
             downlink,
             create,
-            arc[1]['marking'],
+            None,
             label,
-            transition_key,
-            fire_condition))
+            fire_condition))  
 
     return fire_conditions
 
 
-def define_fire_actions(fire_conditions, arc_dict, place_dict, net_name):
+def define_fire_actions(fire_conditions, arc_dict, place_dict, transition_dict, net_name):
     fire_actions = dict()
-    for condition in fire_conditions:
-        sentences = list()
-        origin_name = place_dict[condition[0]]['name'][0]
-        for arc in arc_dict[condition[6]]:
-            dest_place = place_dict[arc['target']]['name'][0]
-            if condition[3]: # if create
-                for new_instance in condition[3]:
-                    net = new_instance.split("()")[0][-1]
-                    #checar mark do arco
-                    element_net_name = ELEMENT_NET_PREFIX + str(net)
-                    sentence = "nt = run {1}({0}); {0} !! nt, 15;".format(dest_place, element_net_name)
-                    sentence.format(dest_place, element_net_name)
-                    sentences.append(sentence)
-                    sentence = "printf(\"Produzindo net tokens \\n\\n\");"
-                    sentences.append(sentence)
+    for transition in transition_dict.keys():
+        for condition in fire_conditions[transition]:
+            sentences = list()
+            print(arc_dict.keys())
+            if transition in arc_dict.keys():
+                for arc in arc_dict[transition]:
+                    if arc not in arc_dict.keys():                
+                        dest_place = place_dict[arc['target']]['name'][0]
+                        if condition[3]: # if create
+                            for new_instance in condition[3]:
+                                net = new_instance.split("()")[0][-1]
+                                #checar mark do arco
+                                element_net_name = ELEMENT_NET_PREFIX + str(net)
+                                sentence = "nt = run {1}({0}); {0} !! nt, 15;".format(dest_place, element_net_name)
+                                sentence.format(dest_place, element_net_name)
+                                sentences.append(sentence)
+                                sentence = "printf(\"Produzindo net tokens \\n\\n\");"
+                                sentences.append(sentence)
 
-            if condition[0] in channel_places and arc['target'] in channel_places:
-                sentence = "recMsg({0}, nt, {1});".format(origin_name, condition[5])
-                sentences.append(sentence)
-                sentence = "transpNetTok({0},{1},nt);".format(origin_name, dest_place)
-                sentences.append(sentence)
-                sentence = "gbChan !! 6-5, nt,1,{};".format(dest_place)
-                sentences.append(sentence)
-                sentence = "sp(nt, 5);"
-                sentences.append(sentence)
-                sentence = "printf(\"{0} Recebendo {1} \\n\\n\");".format(
-                    dest_place,
-                    condition[4].keys()[0]) #sempre o primeiro?
-                sentences.append(sentence)
+                        if condition[0]:
+                            origin_name = place_dict[condition[0]]['name'][0]
+                            if condition[0] in channel_places and arc['target'] in channel_places:
+                                sentence = "recMsg({0}, nt, {1});".format(origin_name, condition[5])
+                                sentences.append(sentence)
+                                sentence = "transpNetTok({0},{1},nt);".format(origin_name, dest_place)
+                                sentences.append(sentence)
+                                sentence = "gbChan !! 6-5, nt,1,{};".format(dest_place)
+                                sentences.append(sentence)
+                                sentence = "sp(nt, 5);"
+                                sentences.append(sentence)
+                                sentence = "printf(\"{0} Recebendo {1} \\n\\n\");".format(
+                                    dest_place,
+                                    condition[4].keys()[0]) #sempre o primeiro?
+                                sentences.append(sentence)
 
-            if condition[0] not in channel_places and "!pc" not in condition[-1]:
-                if condition[4].keys():
-                    for mark in condition[4].keys():
-                        if mark not in net_tokens_list.keys():
-                            sentence = "{0} = {0} - {1};".format(origin_name, condition[4][mark])
+                            if condition[0] not in channel_places and "!pc" not in condition[-1]:
+                                if condition[4].keys():
+                                    for mark in condition[4].keys():
+                                        if mark not in net_tokens_list.keys():
+                                            sentence = "{0} = {0} - {1};".format(origin_name, condition[4][mark])
+                                            sentences.append(sentence)
+                                            break
+                                else:
+                                    sentence = "{0}--;".format(origin_name)
+                                    sentences.append(sentence)               
+
+                        if arc['target'] not in channel_places and "!pc" not in condition[-1]:
+                            if arc['marking'].keys():
+                                for mark in arc['marking'].keys():
+                                    if mark not in net_tokens_list.keys():
+                                        sentence = "{0} = {0} + {1};".format(dest_place, arc['marking'][mark])
+                                        sentences.append(sentence)
+                                        break
+                            else:
+                                sentence = "{0}++;".format(dest_place)
+                                sentences.append(sentence)
+
+                        if "!pc" in condition[-1]:
+                            sentence = "pc !! _pid, {};\n".format(condition[5])
                             sentences.append(sentence)
-                            break
-                else:
-                    sentence = "{0}--;".format(origin_name)
-                    sentences.append(sentence)               
-
-            if arc['target'] not in channel_places and "!pc" not in condition[-1]:
-                if arc['marking'].keys():
-                    for mark in arc['marking'].keys():
-                        if mark not in net_tokens_list.keys():
-                            sentence = "{0} = {0} + {1};".format(dest_place, arc['marking'][mark])
+                            sentence = "printf(\"Transicao EN"+"{} em espera".format(net_name)+"\\n\\n\");\n"
                             sentences.append(sentence)
-                            break
-                else:
-                    sentence = "{0}++;".format(dest_place)
-                    sentences.append(sentence)
 
-            if "!pc" in condition[-1]:
-                sentence = "pc !! _pid, {};\n".format(condition[5])
-                sentences.append(sentence)
-                sentence = "printf(\"Transicao EN"+"{} em espera".format(net_name)+"\\n\\n\");\n"
-                sentences.append(sentence)
-
-            if "_,eval(_pid)" in condition[-1]:
-                sentence = "printf(\"Transicao EN"+"{} disparada".format(net_name)+"\\n\\n\");\n"
-                sentences.append(sentence)                
-        fire_actions[condition[-1]] = sentences
+                        if "_,eval(_pid)" in condition[-1]:
+                            sentence = "printf(\"Transicao EN"+"{} disparada".format(net_name)+"\\n\\n\");\n"
+                            sentences.append(sentence)                
+            else:
+                sentences.append("-+-+-+-+-+-+-+-+-+-+-+-+-=-+-+-+")
+            fire_actions[condition[-1]] = sentences
 
     return fire_actions
 
@@ -555,6 +609,7 @@ def generate_promela_code():
             conditions, 
             arc_dicts[net], 
             place_dicts[net], 
+            transition_dicts[net],
             net)
         if net in system_net:
             for mark in initial_marking:
@@ -604,11 +659,3 @@ sync_dict, transition_label_dict = parse_connected_transitions(
     transition_dicts)
 parse_channel_places(place_dicts, arc_dicts, system_net)
 generate_promela_code()
-
-# processar tokens por nome rede V
-# atribuir etiqueta a transições relacionadas V
-# Downlink SN1 ?? [_,1]
-# uplink !pc ?? [eval(_pid),2]
-#      gbChan ? _,eval(_pid),2,pc
-# Comparar arcos dos lugares com net tokens para saber se é um canal
-# quando lugar recebe net token e black dot gerar erro V

@@ -1,0 +1,267 @@
+<pnml xmlns="RefNet">
+   <net id="netId1547931876442" type="RefNet">
+      <transition id="35">
+         <create>
+            <graphics>
+               <offset x="5" y="-49"/>
+            </graphics>
+            <text>acc: new accountNPN</text>
+         </create>
+         <name>
+            <graphics>
+               <offset x="-1" y="-22"/>
+            </graphics>
+            <text>create</text>
+         </name>
+         <graphics>
+            <position x="163" y="153"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <place id="36">
+         <name>
+            <graphics>
+               <offset x="17" y="17"/>
+            </graphics>
+            <text>created</text>
+         </name>
+         <graphics>
+            <position x="224" y="153"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <transition id="37">
+         <downlink>
+            <graphics>
+               <offset x="6" y="-41"/>
+            </graphics>
+            <text>acc:deposit()</text>
+         </downlink>
+         <name>
+            <graphics>
+               <offset x="0" y="-22"/>
+            </graphics>
+            <text>deposit</text>
+         </name>
+         <graphics>
+            <position x="286" y="83"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <place id="38">
+         <name>
+            <graphics>
+               <offset x="-5" y="17"/>
+            </graphics>
+            <text>deposited</text>
+         </name>
+         <graphics>
+            <position x="345" y="153"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <transition id="39">
+         <downlink>
+            <graphics>
+               <offset x="13" y="-48"/>
+            </graphics>
+            <text>acc:amount()</text>
+         </downlink>
+         <name>
+            <graphics>
+               <offset x="0" y="-22"/>
+            </graphics>
+            <text>query</text>
+         </name>
+         <graphics>
+            <position x="407" y="153"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <place id="40">
+         <initialMarking>
+            <graphics>
+               <offset x="9" y="-15"/>
+            </graphics>
+            <text>[]</text>
+         </initialMarking>
+         <name>
+            <graphics>
+               <offset x="-1" y="19"/>
+            </graphics>
+            <text>init</text>
+         </name>
+         <graphics>
+            <position x="107" y="153"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <place id="41">
+         <name>
+            <graphics>
+               <offset x="29" y="14"/>
+            </graphics>
+            <text>amount</text>
+         </name>
+         <graphics>
+            <position x="464" y="153"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <arc id="42" source="40" target="35">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="43" source="35" target="36">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="44" source="36" target="37">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="45" source="37" target="38">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="46" source="38" target="39">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="47" source="39" target="41">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <place id="50">
+         <name>
+            <graphics>
+               <offset x="43" y="4"/>
+            </graphics>
+            <text>account</text>
+         </name>
+         <graphics>
+            <position x="282" y="259"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <arc id="51" source="35" target="50">
+         <inscription>
+            <graphics>
+               <offset x="-9" y="7"/>
+            </graphics>
+            <text>acc</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="52" source="37" target="50">
+         <inscription>
+            <graphics>
+               <offset x="13" y="0"/>
+            </graphics>
+            <text>acc</text>
+         </inscription>
+         <type>
+            <text>test</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="53" source="39" target="50">
+         <inscription>
+            <graphics>
+               <offset x="3" y="9"/>
+            </graphics>
+            <text>acc</text>
+         </inscription>
+         <type>
+            <text>test</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <transition id="68">
+         <downlink>
+            <graphics>
+               <offset x="7" y="19"/>
+            </graphics>
+            <text>acc:withdraw()</text>
+         </downlink>
+         <name>
+            <graphics>
+               <offset x="46" y="-3"/>
+            </graphics>
+            <text>deposit</text>
+         </name>
+         <graphics>
+            <position x="281" y="412"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="73" source="68" target="50">
+         <inscription>
+            <graphics>
+               <offset x="13" y="0"/>
+            </graphics>
+            <text>acc</text>
+         </inscription>
+         <type>
+            <text>test</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <name>
+         <text>customerNPN</text>
+      </name>
+   </net>
+</pnml>

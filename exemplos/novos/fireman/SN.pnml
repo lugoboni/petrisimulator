@@ -1,0 +1,740 @@
+<pnml xmlns="RefNet">
+   <net id="netId1547925576066" type="RefNet">
+      <place id="1">
+         <name>
+            <graphics>
+               <offset x="11" y="-18"/>
+            </graphics>
+            <text>A</text>
+         </name>
+         <graphics>
+            <position x="82" y="297"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <transition id="2">
+         <downlink>
+            <graphics>
+               <offset x="34" y="20"/>
+            </graphics>
+            <text>f:refill()</text>
+         </downlink>
+         <name>
+            <graphics>
+               <offset x="30" y="0"/>
+            </graphics>
+            <text>Refill</text>
+         </name>
+         <graphics>
+            <position x="82" y="410"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <transition id="3">
+         <downlink>
+            <graphics>
+               <offset x="3" y="-18"/>
+            </graphics>
+            <text>f:retreat()</text>
+         </downlink>
+         <name>
+            <graphics>
+               <offset x="0" y="18"/>
+            </graphics>
+            <text>BtoA</text>
+         </name>
+         <graphics>
+            <position x="174" y="262"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <place id="4">
+         <name>
+            <graphics>
+               <offset x="12" y="-17"/>
+            </graphics>
+            <text>B</text>
+         </name>
+         <graphics>
+            <position x="264" y="297"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <place id="5">
+         <name>
+            <graphics>
+               <offset x="10" y="-16"/>
+            </graphics>
+            <text>C</text>
+         </name>
+         <graphics>
+            <position x="424" y="299"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <transition id="6">
+         <downlink>
+            <graphics>
+               <offset x="5" y="18"/>
+            </graphics>
+            <text>f:approachFire()</text>
+         </downlink>
+         <name>
+            <graphics>
+               <offset x="-3" y="-19"/>
+            </graphics>
+            <text>AtoB</text>
+         </name>
+         <graphics>
+            <position x="181" y="336"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <transition id="7">
+         <downlink>
+            <graphics>
+               <offset x="4" y="-19"/>
+            </graphics>
+            <text>f:retreat()</text>
+         </downlink>
+         <name>
+            <graphics>
+               <offset x="1" y="20"/>
+            </graphics>
+            <text>CtoB</text>
+         </name>
+         <graphics>
+            <position x="345" y="262"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <transition id="8">
+         <downlink>
+            <graphics>
+               <offset x="4" y="18"/>
+            </graphics>
+            <text>f:approachFire()</text>
+         </downlink>
+         <name>
+            <graphics>
+               <offset x="-1" y="-19"/>
+            </graphics>
+            <text>BtoC</text>
+         </name>
+         <graphics>
+            <position x="345" y="340"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="9" source="1" target="6">
+         <inscription>
+            <graphics>
+               <offset x="-5" y="12"/>
+            </graphics>
+            <text>f</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="10" source="6" target="4">
+         <inscription>
+            <graphics>
+               <offset x="3" y="15"/>
+            </graphics>
+            <text>f</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="11" source="4" target="8">
+         <inscription>
+            <graphics>
+               <offset x="-8" y="11"/>
+            </graphics>
+            <text>f</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="12" source="8" target="5">
+         <inscription>
+            <graphics>
+               <offset x="0" y="15"/>
+            </graphics>
+            <text>f</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="13" source="5" target="7">
+         <inscription>
+            <graphics>
+               <offset x="2" y="-10"/>
+            </graphics>
+            <text>f</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="14" source="7" target="4">
+         <inscription>
+            <graphics>
+               <offset x="-2" y="-11"/>
+            </graphics>
+            <text>f</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="15" source="4" target="3">
+         <inscription>
+            <graphics>
+               <offset x="-1" y="-9"/>
+            </graphics>
+            <text>f</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="16" source="3" target="1">
+         <inscription>
+            <graphics>
+               <offset x="1" y="-11"/>
+            </graphics>
+            <text>f</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="17" source="1" target="2">
+         <inscription>
+            <graphics>
+               <offset x="9" y="4"/>
+            </graphics>
+            <text>f</text>
+         </inscription>
+         <type>
+            <text>test</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <transition id="18">
+         <downlink>
+            <graphics>
+               <offset x="-44" y="18"/>
+            </graphics>
+            <text>f:extinguish()</text>
+         </downlink>
+         <name>
+            <graphics>
+               <offset x="-49" y="0"/>
+            </graphics>
+            <text>Extinguish</text>
+         </name>
+         <graphics>
+            <position x="562" y="410"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="19" source="68" target="18">
+         <inscription>
+            <graphics>
+               <offset x="5" y="0"/>
+            </graphics>
+            <text>f</text>
+         </inscription>
+         <type>
+            <text>test</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <transition id="20">
+         <create>
+            <graphics>
+               <offset x="59" y="-60"/>
+            </graphics>
+            <text>f1: new Fireman()</text>
+         </create>
+         <create>
+            <graphics>
+               <offset x="59" y="-43"/>
+            </graphics>
+            <text>f2: new Fireman()</text>
+         </create>
+         <create>
+            <graphics>
+               <offset x="59" y="-26"/>
+            </graphics>
+            <text>f3: new Fireman()</text>
+         </create>
+         <graphics>
+            <position x="82" y="191"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="21" source="20" target="1">
+         <inscription>
+            <graphics>
+               <offset x="10" y="-15"/>
+            </graphics>
+            <text>f1</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="23" source="20" target="4">
+         <inscription>
+            <graphics>
+               <offset x="-44" y="-27"/>
+            </graphics>
+            <text>f2</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <position x="264" y="229"/>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <transition id="44">
+         <downlink>
+            <graphics>
+               <offset x="-28" y="20"/>
+            </graphics>
+            <text>f1:exchange(be,bf)</text>
+         </downlink>
+         <downlink>
+            <graphics>
+               <offset x="-28" y="38"/>
+            </graphics>
+            <text>f2:exchange(bf,be)</text>
+         </downlink>
+         <name>
+            <graphics>
+               <offset x="-46" y="0"/>
+            </graphics>
+            <text>ExchangeB</text>
+         </name>
+         <graphics>
+            <position x="264" y="410"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="45" source="4" target="44">
+         <inscription>
+            <graphics>
+               <offset x="-10" y="29"/>
+            </graphics>
+            <text>f1</text>
+         </inscription>
+         <type>
+            <text>test</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="46" source="44" target="4">
+         <inscription>
+            <graphics>
+               <offset x="9" y="29"/>
+            </graphics>
+            <text>f2</text>
+         </inscription>
+         <type>
+            <text>test</text>
+         </type>
+         <graphics>
+            <position x="279" y="357"/>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <place id="53">
+         <name>
+            <graphics>
+               <offset x="0" y="-21"/>
+            </graphics>
+            <text>Fire</text>
+         </name>
+         <graphics>
+            <position x="586" y="191"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <arc id="54" source="20" target="53">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="55" source="20" target="53">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="56" source="20" target="53">
+         <label>
+            <graphics>
+               <offset x="-53" y="-9"/>
+            </graphics>
+            <text>3</text>
+         </label>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="57" source="53" target="18">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <position x="586" y="385"/>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <place id="68">
+         <name>
+            <graphics>
+               <offset x="8" y="-18"/>
+            </graphics>
+            <text>D</text>
+         </name>
+         <graphics>
+            <position x="562" y="300"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <transition id="69">
+         <downlink>
+            <graphics>
+               <offset x="2" y="-20"/>
+            </graphics>
+            <text>f:retreat()</text>
+         </downlink>
+         <name>
+            <graphics>
+               <offset x="1" y="20"/>
+            </graphics>
+            <text>DtoC</text>
+         </name>
+         <graphics>
+            <position x="502" y="262"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <transition id="70">
+         <downlink>
+            <graphics>
+               <offset x="2" y="21"/>
+            </graphics>
+            <text>f:approachFire()</text>
+         </downlink>
+         <name>
+            <graphics>
+               <offset x="-1" y="-19"/>
+            </graphics>
+            <text>CtoD</text>
+         </name>
+         <graphics>
+            <position x="502" y="340"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="71" source="5" target="70">
+         <inscription>
+            <graphics>
+               <offset x="-8" y="11"/>
+            </graphics>
+            <text>f</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="72" source="70" target="68">
+         <inscription>
+            <graphics>
+               <offset x="0" y="15"/>
+            </graphics>
+            <text>f</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="73" source="68" target="69">
+         <inscription>
+            <graphics>
+               <offset x="2" y="-10"/>
+            </graphics>
+            <text>f</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="74" source="69" target="5">
+         <inscription>
+            <graphics>
+               <offset x="-2" y="-11"/>
+            </graphics>
+            <text>f</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <transition id="81">
+         <downlink>
+            <graphics>
+               <offset x="-28" y="20"/>
+            </graphics>
+            <text>f1:exchange(be,bf)</text>
+         </downlink>
+         <downlink>
+            <graphics>
+               <offset x="-28" y="38"/>
+            </graphics>
+            <text>f2:exchange(bf,be)</text>
+         </downlink>
+         <name>
+            <graphics>
+               <offset x="-46" y="0"/>
+            </graphics>
+            <text>ExchangeC</text>
+         </name>
+         <graphics>
+            <position x="424" y="410"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="82" source="5" target="81">
+         <inscription>
+            <graphics>
+               <offset x="-10" y="28"/>
+            </graphics>
+            <text>f1</text>
+         </inscription>
+         <type>
+            <text>test</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="83" source="81" target="5">
+         <inscription>
+            <graphics>
+               <offset x="9" y="28"/>
+            </graphics>
+            <text>f2</text>
+         </inscription>
+         <type>
+            <text>test</text>
+         </type>
+         <graphics>
+            <position x="443" y="357"/>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="92" source="20" target="5">
+         <inscription>
+            <graphics>
+               <offset x="-29" y="-30"/>
+            </graphics>
+            <text>f3</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <position x="424" y="218"/>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <transition id="96">
+         <name>
+            <graphics>
+               <offset x="-65" y="0"/>
+            </graphics>
+            <text>FireExtinguished</text>
+         </name>
+         <graphics>
+            <position x="493" y="490"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <place id="97">
+         <name>
+            <graphics>
+               <offset x="1" y="18"/>
+            </graphics>
+            <text>Ashes</text>
+         </name>
+         <graphics>
+            <position x="561" y="490"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <arc id="98" source="18" target="97">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="99" source="97" target="96">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="100" source="97" target="96">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="101" source="97" target="96">
+         <label>
+            <graphics>
+               <offset x="-4" y="-7"/>
+            </graphics>
+            <text>3</text>
+         </label>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <place id="107">
+         <initialMarking>
+            <graphics>
+               <offset x="0" y="0"/>
+            </graphics>
+            <text>[]</text>
+         </initialMarking>
+         <graphics>
+            <position x="82" y="102"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <arc id="108" source="107" target="20">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <name>
+         <text>FireExtinction</text>
+      </name>
+   </net>
+</pnml>

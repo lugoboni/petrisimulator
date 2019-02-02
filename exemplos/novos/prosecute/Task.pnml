@@ -1,0 +1,573 @@
+<pnml xmlns="RefNet">
+   <net id="netId1547927875204" type="RefNet">
+      <place id="2">
+         <graphics>
+            <position x="47" y="109"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <transition id="3">
+         <name>
+            <graphics>
+               <offset x="0" y="17"/>
+            </graphics>
+            <text>record</text>
+         </name>
+         <uplink>
+            <graphics>
+               <offset x="3" y="-17"/>
+            </graphics>
+            <text>:recording()</text>
+         </uplink>
+         <graphics>
+            <position x="104" y="109"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <place id="4">
+         <graphics>
+            <position x="170" y="109"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <transition id="5">
+         <name>
+            <graphics>
+               <offset x="0" y="18"/>
+            </graphics>
+            <text>print</text>
+         </name>
+         <uplink>
+            <graphics>
+               <offset x="0" y="-21"/>
+            </graphics>
+            <text>:printing()</text>
+         </uplink>
+         <graphics>
+            <position x="231" y="109"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <place id="6">
+         <graphics>
+            <position x="301" y="78"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <place id="7">
+         <graphics>
+            <position x="301" y="141"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <transition id="8">
+         <name>
+            <graphics>
+               <offset x="0" y="18"/>
+            </graphics>
+            <text>verify</text>
+         </name>
+         <uplink>
+            <graphics>
+               <offset x="-1" y="-18"/>
+            </graphics>
+            <text>:verifying()</text>
+         </uplink>
+         <graphics>
+            <position x="360" y="78"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <transition id="9">
+         <name>
+            <graphics>
+               <offset x="5" y="19"/>
+            </graphics>
+            <text>complete</text>
+         </name>
+         <uplink>
+            <graphics>
+               <offset x="0" y="-17"/>
+            </graphics>
+            <text>:compl()</text>
+         </uplink>
+         <graphics>
+            <position x="360" y="141"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <place id="10">
+         <graphics>
+            <position x="417" y="78"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <place id="11">
+         <graphics>
+            <position x="417" y="141"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <transition id="12">
+         <name>
+            <graphics>
+               <offset x="7" y="17"/>
+            </graphics>
+            <text>collect</text>
+         </name>
+         <uplink>
+            <graphics>
+               <offset x="7" y="-20"/>
+            </graphics>
+            <text>:join1()</text>
+         </uplink>
+         <graphics>
+            <position x="457" y="109"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <place id="13">
+         <graphics>
+            <position x="499" y="109"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <transition id="14">
+         <name>
+            <graphics>
+               <offset x="-38" y="4"/>
+            </graphics>
+            <text>examine</text>
+         </name>
+         <uplink>
+            <graphics>
+               <offset x="-26" y="-16"/>
+            </graphics>
+            <text>:ex()</text>
+         </uplink>
+         <graphics>
+            <position x="499" y="218"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <place id="15">
+         <graphics>
+            <position x="497" y="342"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <transition id="16">
+         <name>
+            <graphics>
+               <offset x="0" y="15"/>
+            </graphics>
+            <text>dec_summ</text>
+         </name>
+         <uplink>
+            <graphics>
+               <offset x="0" y="-17"/>
+            </graphics>
+            <text>:decide()</text>
+         </uplink>
+         <graphics>
+            <position x="431" y="293"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <transition id="17">
+         <name>
+            <graphics>
+               <offset x="1" y="15"/>
+            </graphics>
+            <text>dec_charge</text>
+         </name>
+         <uplink>
+            <graphics>
+               <offset x="0" y="-17"/>
+            </graphics>
+            <text>:decide()</text>
+         </uplink>
+         <graphics>
+            <position x="431" y="342"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <transition id="18">
+         <name>
+            <graphics>
+               <offset x="0" y="18"/>
+            </graphics>
+            <text>dec_susp</text>
+         </name>
+         <uplink>
+            <graphics>
+               <offset x="0" y="-19"/>
+            </graphics>
+            <text>:decide()</text>
+         </uplink>
+         <graphics>
+            <position x="431" y="393"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <place id="19">
+         <graphics>
+            <position x="377" y="293"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <place id="20">
+         <graphics>
+            <position x="377" y="342"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <place id="21">
+         <graphics>
+            <position x="377" y="393"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <transition id="22">
+         <name>
+            <graphics>
+               <offset x="6" y="18"/>
+            </graphics>
+            <text>summon</text>
+         </name>
+         <uplink>
+            <graphics>
+               <offset x="1" y="-18"/>
+            </graphics>
+            <text>:summ()</text>
+         </uplink>
+         <graphics>
+            <position x="323" y="293"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <transition id="23">
+         <name>
+            <graphics>
+               <offset x="1" y="16"/>
+            </graphics>
+            <text>charge</text>
+         </name>
+         <uplink>
+            <graphics>
+               <offset x="1" y="-15"/>
+            </graphics>
+            <text>:charg()</text>
+         </uplink>
+         <graphics>
+            <position x="323" y="342"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <transition id="24">
+         <name>
+            <graphics>
+               <offset x="1" y="17"/>
+            </graphics>
+            <text>suspend</text>
+         </name>
+         <uplink>
+            <graphics>
+               <offset x="2" y="-18"/>
+            </graphics>
+            <text>:susp()</text>
+         </uplink>
+         <graphics>
+            <position x="323" y="393"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <place id="25">
+         <graphics>
+            <position x="260" y="341"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <arc id="26" source="2" target="3">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="27" source="3" target="4">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="28" source="4" target="5">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="29" source="5" target="6">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="30" source="5" target="7">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="31" source="7" target="9">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="32" source="6" target="8">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="33" source="8" target="10">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="34" source="9" target="11">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="35" source="11" target="12">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="36" source="10" target="12">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="37" source="12" target="13">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="38" source="13" target="14">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="39" source="14" target="15">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="40" source="15" target="16">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="41" source="15" target="17">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="42" source="15" target="18">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="43" source="18" target="21">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="44" source="17" target="20">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="45" source="16" target="19">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="46" source="19" target="22">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="47" source="22" target="25">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="48" source="20" target="23">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="49" source="23" target="25">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="50" source="21" target="24">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="51" source="24" target="25">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <transition id="64">
+         <uplink>
+            <graphics>
+               <offset x="0" y="-19"/>
+            </graphics>
+            <text>:new()</text>
+         </uplink>
+         <graphics>
+            <position x="47" y="49"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="65" source="64" target="2">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <name>
+         <text>Task</text>
+      </name>
+   </net>
+</pnml>

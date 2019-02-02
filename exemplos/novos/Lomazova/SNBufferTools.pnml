@@ -1,0 +1,436 @@
+<pnml xmlns="RefNet">
+   <net id="netId1548676033820" type="RefNet">
+      <place id="1">
+         <name>
+            <graphics>
+               <offset x="1" y="-22"/>
+            </graphics>
+            <text>S2</text>
+         </name>
+         <graphics>
+            <position x="170" y="61"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <arc id="2" source="1" target="3">
+         <inscription>
+            <graphics>
+               <offset x="0" y="5"/>
+            </graphics>
+            <text>x</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <transition id="3">
+         <downlink>
+            <graphics>
+               <offset x="3" y="-20"/>
+            </graphics>
+            <text>x: t2()</text>
+         </downlink>
+         <graphics>
+            <position x="386" y="62"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <transition id="4">
+         <create>
+            <graphics>
+               <offset x="6" y="-18"/>
+            </graphics>
+            <text>x: new ENWorker</text>
+         </create>
+         <graphics>
+            <position x="71" y="61"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="5" source="4" target="1">
+         <inscription>
+            <graphics>
+               <offset x="2" y="5"/>
+            </graphics>
+            <text>x</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="6" source="4" target="7">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <position x="59" y="99"/>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <place id="7">
+         <initialMarking>
+            <graphics>
+               <offset x="0" y="0"/>
+            </graphics>
+            <text>[]</text>
+         </initialMarking>
+         <name>
+            <graphics>
+               <offset x="25" y="4"/>
+            </graphics>
+            <text>S1</text>
+         </name>
+         <graphics>
+            <position x="72" y="133"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <arc id="11" source="7" target="4">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <position x="88" y="97"/>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="12" source="7" target="13">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <position x="42" y="176"/>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <transition id="13">
+         <downlink>
+            <graphics>
+               <offset x="-32" y="-2"/>
+            </graphics>
+            <text>x: t3()</text>
+         </downlink>
+         <graphics>
+            <position x="73" y="226"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="14" source="13" target="15">
+         <inscription>
+            <graphics>
+               <offset x="0" y="8"/>
+            </graphics>
+            <text>x</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <place id="15">
+         <name>
+            <graphics>
+               <offset x="0" y="-17"/>
+            </graphics>
+            <text>S6</text>
+         </name>
+         <graphics>
+            <position x="223" y="226"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <arc id="20" source="13" target="7">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <position x="100" y="175"/>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="21" source="15" target="22">
+         <inscription>
+            <graphics>
+               <offset x="0" y="8"/>
+            </graphics>
+            <text>x</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <transition id="22">
+         <downlink>
+            <graphics>
+               <offset x="2" y="17"/>
+            </graphics>
+            <text>x: t4()</text>
+         </downlink>
+         <graphics>
+            <position x="387" y="226"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="23" source="3" target="24">
+         <inscription>
+            <graphics>
+               <offset x="13" y="2"/>
+            </graphics>
+            <text>x</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <place id="24">
+         <name>
+            <graphics>
+               <offset x="0" y="19"/>
+            </graphics>
+            <text>S3</text>
+         </name>
+         <graphics>
+            <position x="458" y="280"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <arc id="25" source="24" target="13">
+         <inscription>
+            <graphics>
+               <offset x="0" y="36"/>
+            </graphics>
+            <text>x</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <position x="71" y="281"/>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="34" source="1" target="35">
+         <inscription>
+            <graphics>
+               <offset x="-5" y="-8"/>
+            </graphics>
+            <text>x</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <transition id="35">
+         <downlink>
+            <graphics>
+               <offset x="-8" y="16"/>
+            </graphics>
+            <text>x: t1()</text>
+         </downlink>
+         <graphics>
+            <position x="171" y="136"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="36" source="35" target="37">
+         <inscription>
+            <graphics>
+               <offset x="21" y="-11"/>
+            </graphics>
+            <text>[]</text>
+         </inscription>
+         <inscription>
+            <graphics>
+               <offset x="16" y="-11"/>
+            </graphics>
+            <text>[]</text>
+         </inscription>
+         <inscription>
+            <graphics>
+               <offset x="26" y="-11"/>
+            </graphics>
+            <text>[]</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <position x="228" y="116"/>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <place id="37">
+         <name>
+            <graphics>
+               <offset x="25" y="3"/>
+            </graphics>
+            <text>S4</text>
+         </name>
+         <graphics>
+            <position x="295" y="136"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <place id="41">
+         <initialMarking>
+            <graphics>
+               <offset x="4" y="0"/>
+            </graphics>
+            <text>[]</text>
+         </initialMarking>
+         <name>
+            <graphics>
+               <offset x="-21" y="3"/>
+            </graphics>
+            <text>S5</text>
+         </name>
+         <initialMarking>
+            <graphics>
+               <offset x="-1" y="0"/>
+            </graphics>
+            <text>[]</text>
+         </initialMarking>
+         <initialMarking>
+            <graphics>
+               <offset x="9" y="0"/>
+            </graphics>
+            <text>[]</text>
+         </initialMarking>
+         <initialMarking>
+            <graphics>
+               <offset x="-6" y="0"/>
+            </graphics>
+            <text>[]</text>
+         </initialMarking>
+         <graphics>
+            <position x="386" y="136"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <arc id="44" source="22" target="41">
+         <inscription>
+            <graphics>
+               <offset x="-7" y="0"/>
+            </graphics>
+            <text>y</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="50" source="37" target="35">
+         <inscription>
+            <graphics>
+               <offset x="-34" y="15"/>
+            </graphics>
+            <text>[]</text>
+         </inscription>
+         <inscription>
+            <graphics>
+               <offset x="-29" y="15"/>
+            </graphics>
+            <text>[]</text>
+         </inscription>
+         <inscription>
+            <graphics>
+               <offset x="-24" y="15"/>
+            </graphics>
+            <text>[]</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <position x="226" y="164"/>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="55" source="41" target="3">
+         <inscription>
+            <graphics>
+               <offset x="-7" y="3"/>
+            </graphics>
+            <text>y</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="59" source="3" target="37">
+         <inscription>
+            <graphics>
+               <offset x="-15" y="-1"/>
+            </graphics>
+            <text>y</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="61" source="37" target="22">
+         <inscription>
+            <graphics>
+               <offset x="-7" y="6"/>
+            </graphics>
+            <text>y</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <name>
+         <text>SNBufferTools</text>
+      </name>
+   </net>
+</pnml>

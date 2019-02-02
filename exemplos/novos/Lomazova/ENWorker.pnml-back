@@ -1,0 +1,289 @@
+<pnml xmlns="RefNet">
+   <net id="netId1548676043063" type="RefNet">
+      <place id="1">
+         <initialMarking>
+            <graphics>
+               <offset x="0" y="0"/>
+            </graphics>
+            <text>[]</text>
+         </initialMarking>
+         <name>
+            <graphics>
+               <offset x="-27" y="1"/>
+            </graphics>
+            <text>W2</text>
+         </name>
+         <graphics>
+            <position x="158" y="70"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <arc id="2" source="1" target="3">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <transition id="3">
+         <uplink>
+            <graphics>
+               <offset x="27" y="0"/>
+            </graphics>
+            <text>:t1()</text>
+         </uplink>
+         <graphics>
+            <position x="242" y="137"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="4" source="1" target="5">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <transition id="5">
+         <uplink>
+            <graphics>
+               <offset x="1" y="-17"/>
+            </graphics>
+            <text>: t2()</text>
+         </uplink>
+         <graphics>
+            <position x="237" y="70"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="10" source="5" target="11">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <place id="11">
+         <name>
+            <graphics>
+               <offset x="29" y="0"/>
+            </graphics>
+            <text>W3</text>
+         </name>
+         <graphics>
+            <position x="323" y="70"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <arc id="12" source="3" target="13">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <place id="13">
+         <name>
+            <graphics>
+               <offset x="-24" y="4"/>
+            </graphics>
+            <text>W1</text>
+         </name>
+         <graphics>
+            <position x="159" y="193"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <arc id="14" source="13" target="15">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <transition id="15">
+         <graphics>
+            <position x="158" y="133"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="20" source="11" target="21">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <transition id="21">
+         <uplink>
+            <graphics>
+               <offset x="23" y="1"/>
+            </graphics>
+            <text>: t3()</text>
+         </uplink>
+         <graphics>
+            <position x="324" y="134"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="22" source="21" target="23">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <place id="23">
+         <name>
+            <graphics>
+               <offset x="29" y="0"/>
+            </graphics>
+            <text>W4</text>
+         </name>
+         <graphics>
+            <position x="324" y="195"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <arc id="24" source="23" target="25">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <transition id="25">
+         <uplink>
+            <graphics>
+               <offset x="27" y="0"/>
+            </graphics>
+            <text>:t4()</text>
+         </uplink>
+         <graphics>
+            <position x="324" y="259"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="26" source="25" target="27">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <place id="27">
+         <name>
+            <graphics>
+               <offset x="2" y="22"/>
+            </graphics>
+            <text>W0</text>
+         </name>
+         <graphics>
+            <position x="252" y="258"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <arc id="28" source="27" target="29">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <transition id="29">
+         <graphics>
+            <position x="161" y="258"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="30" source="29" target="13">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <transition id="31">
+         <graphics>
+            <position x="48" y="259"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="32" source="31" target="33">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <place id="33">
+         <name>
+            <graphics>
+               <offset x="0" y="-18"/>
+            </graphics>
+            <text>T</text>
+         </name>
+         <graphics>
+            <position x="112" y="258"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <arc id="36" source="33" target="29">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="43" source="15" target="1">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <name>
+         <text>ENWorker</text>
+      </name>
+   </net>
+</pnml>

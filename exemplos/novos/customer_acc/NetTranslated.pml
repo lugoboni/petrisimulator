@@ -91,57 +91,11 @@ chan gbChan = [18] of {byte, byte, byte, chan};
 
 
 /*###############################################*/ 
-proctype ENA (chan pc){
-   byte pa2 = 0;
-   byte pa1 = 1;
-   endl: do
-       ::atomic {pa1 > 0 && empty(gbChan) && !pc ?? [eval(_pid),1] ->
-           pc !! _pid, 1;
-
-           printf("Transicao ENA em espera\n\n");
-
-       }
-
-       ::atomic {gbChan ? _,eval(_pid),1,pc ->
-           pa1--;
-           pa2++;
-           printf("Transicao ENA disparada\n\n");
-
-       }
-
-   od
-}
-
-/*###############################################*/
-
-proctype ENB (chan pc){
-   byte pb1 = 1;
-   byte pb2 = 0;
-   endl: do
-       ::atomic {gbChan ? _,eval(_pid),2,pc ->
-           pb1--;
-           pb2++;
-           printf("Transicao ENB disparada\n\n");
-
-       }
-
-       ::atomic {pb1 > 0 && empty(gbChan) && !pc ?? [eval(_pid),2] ->
-           pc !! _pid, 2;
-
-           printf("Transicao ENB em espera\n\n");
-
-       }
-
-   od
-}
-
-/*###############################################*/
-
-byte SN4 = 2;
-byte SN3 = 0;
-NetPlace(SN2);
-byte SN0 = 2;
-NetPlace(SN1);
+NetPlace(account);
+byte deposited = 0;
+byte created = 0;
+byte init = 1;
+byte amount = 0;
 init {
 
    atomic{
@@ -149,32 +103,31 @@ init {
    }
 
    endl: do
-       ::atomic{ empty(gbChan) && SN1 ?? [_,1] ->
+       ::atomic{ init > 0 &&  ->
            sp(_pid,6);
-           SN3++;
-           recMsg(SN1, nt, 1);
-           transpNetTok(SN1,SN2,nt);
-           gbChan !! 6-5, nt,1,SN2;
-           sp(nt, 5);
-           printf("SN2 Recebendo a \n\n");
+           nt = run ENN(created); created !! nt, 15;
+           printf("Produzindo net tokens \n\n");
+           init--;
+           created++;
+           nt = run ENN(account); account !! nt, 15;
+           printf("Produzindo net tokens \n\n");
+           init--;
            sp(_pid,1);
        }
 
-       ::atomic{ empty(gbChan) && SN1 ?? [_,2] && SN4 > 1SN4 > 1 ->
+       ::atomic{ deposited > 0 &&  ->
            sp(_pid,6);
-           SN4 = SN4 - 1;
-           SN4 = SN4 - 1;
-           SN4 = SN4 + 1;
+           deposited--;
+           amount++;
+           deposited--;
            sp(_pid,1);
        }
 
-       ::atomic{ SN0 > 0 && empty(gbChan) ->
+       ::atomic{ created > 0 &&  ->
            sp(_pid,6);
-           nt = run ENA(SN1); SN1 !! nt, 15;
-           printf("Produzindo net tokens \n\n");
-           nt = run ENB(SN1); SN1 !! nt, 15;
-           printf("Produzindo net tokens \n\n");
-           SN0--;
+           created--;
+           deposited++;
+           created--;
            sp(_pid,1);
        }
 

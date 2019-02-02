@@ -1,0 +1,653 @@
+<pnml xmlns="RefNet">
+   <net id="netId1468178337063" type="RefNet">
+      <place id="2">
+         <graphics>
+            <position x="82" y="209"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <transition id="3">
+         <downlink>
+            <graphics>
+               <offset x="3" y="-18"/>
+            </graphics>
+            <text>t:recording()</text>
+         </downlink>
+         <name>
+            <graphics>
+               <offset x="0" y="15"/>
+            </graphics>
+            <text>official1</text>
+         </name>
+         <graphics>
+            <position x="170" y="209"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="4" source="2" target="3">
+         <inscription>
+            <graphics>
+               <offset x="-2" y="-9"/>
+            </graphics>
+            <text>t</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <transition id="5">
+         <create>
+            <graphics>
+               <offset x="54" y="6"/>
+            </graphics>
+            <text>t: new Task()</text>
+         </create>
+         <create>
+            <graphics>
+               <offset x="55" y="-10"/>
+            </graphics>
+            <text>t1:new Task()</text>
+         </create>
+         <graphics>
+            <position x="82" y="334"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="6" source="5" target="2">
+         <inscription>
+            <graphics>
+               <offset x="16" y="-5"/>
+            </graphics>
+            <text>t</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <position x="94" y="272"/>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <place id="13">
+         <graphics>
+            <position x="265" y="209"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <arc id="14" source="3" target="13">
+         <inscription>
+            <graphics>
+               <offset x="5" y="-8"/>
+            </graphics>
+            <text>t</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <transition id="16">
+         <downlink>
+            <graphics>
+               <offset x="1" y="-19"/>
+            </graphics>
+            <text>t:ex()</text>
+         </downlink>
+         <name>
+            <graphics>
+               <offset x="0" y="16"/>
+            </graphics>
+            <text>official1</text>
+         </name>
+         <graphics>
+            <position x="169" y="257"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="17" source="2" target="16">
+         <inscription>
+            <graphics>
+               <offset x="-7" y="10"/>
+            </graphics>
+            <text>t</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="18" source="16" target="13">
+         <inscription>
+            <graphics>
+               <offset x="4" y="10"/>
+            </graphics>
+            <text>t</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <transition id="22">
+         <downlink>
+            <graphics>
+               <offset x="0" y="-29"/>
+            </graphics>
+            <text>t:printing()</text>
+         </downlink>
+         <name>
+            <graphics>
+               <offset x="1" y="24"/>
+            </graphics>
+            <text>printer</text>
+         </name>
+         <graphics>
+            <position x="320" y="209"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="23" source="13" target="22">
+         <inscription>
+            <graphics>
+               <offset x="-1" y="-10"/>
+            </graphics>
+            <text>t</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <place id="29">
+         <graphics>
+            <position x="378" y="172"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <place id="30">
+         <graphics>
+            <position x="383" y="248"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <arc id="31" source="22" target="29">
+         <inscription>
+            <graphics>
+               <offset x="8" y="4"/>
+            </graphics>
+            <text>t</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="32" source="22" target="30">
+         <inscription>
+            <graphics>
+               <offset x="9" y="-3"/>
+            </graphics>
+            <text>t</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <transition id="35">
+         <downlink>
+            <graphics>
+               <offset x="2" y="-19"/>
+            </graphics>
+            <text>t:verifying()</text>
+         </downlink>
+         <name>
+            <graphics>
+               <offset x="1" y="19"/>
+            </graphics>
+            <text>secretary</text>
+         </name>
+         <graphics>
+            <position x="431" y="172"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <transition id="36">
+         <downlink>
+            <graphics>
+               <offset x="-1" y="-18"/>
+            </graphics>
+            <text>t:compl()</text>
+         </downlink>
+         <name>
+            <graphics>
+               <offset x="1" y="16"/>
+            </graphics>
+            <text>official2</text>
+         </name>
+         <graphics>
+            <position x="434" y="248"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <place id="37">
+         <graphics>
+            <position x="488" y="172"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <place id="38">
+         <graphics>
+            <position x="489" y="247"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <transition id="39">
+         <name>
+            <graphics>
+               <offset x="18" y="23"/>
+            </graphics>
+            <text>put_together</text>
+         </name>
+         <downlink>
+            <graphics>
+               <offset x="24" y="-21"/>
+            </graphics>
+            <text>t:join1()</text>
+         </downlink>
+         <graphics>
+            <position x="542" y="209"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="40" source="29" target="35">
+         <inscription>
+            <graphics>
+               <offset x="-7" y="-7"/>
+            </graphics>
+            <text>t</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="41" source="35" target="37">
+         <inscription>
+            <graphics>
+               <offset x="3" y="-7"/>
+            </graphics>
+            <text>t</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="42" source="30" target="36">
+         <inscription>
+            <graphics>
+               <offset x="-1" y="-10"/>
+            </graphics>
+            <text>t</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="43" source="36" target="38">
+         <inscription>
+            <graphics>
+               <offset x="0" y="-9"/>
+            </graphics>
+            <text>t</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="44" source="37" target="39">
+         <inscription>
+            <graphics>
+               <offset x="-4" y="4"/>
+            </graphics>
+            <text>t</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="45" source="38" target="39">
+         <inscription>
+            <graphics>
+               <offset x="-5" y="-4"/>
+            </graphics>
+            <text>t</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="58" source="39" target="2">
+         <inscription>
+            <graphics>
+               <offset x="234" y="-4"/>
+            </graphics>
+            <text>t</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <position x="542" y="119"/>
+            <position x="82" y="119"/>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <transition id="59">
+         <downlink>
+            <graphics>
+               <offset x="43" y="-10"/>
+            </graphics>
+            <text>t:decide(x)</text>
+         </downlink>
+         <name>
+            <graphics>
+               <offset x="47" y="5"/>
+            </graphics>
+            <text>prosecutor</text>
+         </name>
+         <graphics>
+            <position x="265" y="300"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="60" source="13" target="59">
+         <inscription>
+            <graphics>
+               <offset x="6" y="-4"/>
+            </graphics>
+            <text>t</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <place id="64">
+         <graphics>
+            <position x="265" y="360"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <arc id="65" source="59" target="64">
+         <inscription>
+            <graphics>
+               <offset x="5" y="-1"/>
+            </graphics>
+            <text>t</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <transition id="68">
+         <downlink>
+            <graphics>
+               <offset x="-8" y="-25"/>
+            </graphics>
+            <text>t:summ()</text>
+         </downlink>
+         <name>
+            <graphics>
+               <offset x="4" y="28"/>
+            </graphics>
+            <text>tribunal</text>
+         </name>
+         <graphics>
+            <position x="181" y="440"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <transition id="70">
+         <downlink>
+            <graphics>
+               <offset x="4" y="-25"/>
+            </graphics>
+            <text>t:charg()</text>
+         </downlink>
+         <name>
+            <graphics>
+               <offset x="-37" y="27"/>
+            </graphics>
+            <text>tribunal</text>
+         </name>
+         <graphics>
+            <position x="222" y="441"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="74" source="64" target="68">
+         <inscription>
+            <graphics>
+               <offset x="1" y="-12"/>
+            </graphics>
+            <text>t</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="75" source="64" target="70">
+         <inscription>
+            <graphics>
+               <offset x="12" y="-12"/>
+            </graphics>
+            <text>t</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <place id="76">
+         <graphics>
+            <position x="269" y="529"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <arc id="77" source="68" target="76">
+         <inscription>
+            <graphics>
+               <offset x="-9" y="7"/>
+            </graphics>
+            <text>t</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="78" source="70" target="76">
+         <inscription>
+            <graphics>
+               <offset x="7" y="2"/>
+            </graphics>
+            <text>t</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <transition id="79">
+         <downlink>
+            <graphics>
+               <offset x="37" y="-7"/>
+            </graphics>
+            <text>t:susp()</text>
+         </downlink>
+         <name>
+            <graphics>
+               <offset x="39" y="9"/>
+            </graphics>
+            <text>official3</text>
+         </name>
+         <graphics>
+            <position x="317" y="439"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="80" source="64" target="79">
+         <inscription>
+            <graphics>
+               <offset x="2" y="-6"/>
+            </graphics>
+            <text>t</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="81" source="79" target="76">
+         <inscription>
+            <graphics>
+               <offset x="6" y="3"/>
+            </graphics>
+            <text>t</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="93" source="5" target="2">
+         <inscription>
+            <graphics>
+               <offset x="-15" y="-2"/>
+            </graphics>
+            <text>t1</text>
+         </inscription>
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <position x="68" y="269"/>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <place id="95">
+         <initialMarking>
+            <graphics>
+               <offset x="0" y="0"/>
+            </graphics>
+            <text>[]</text>
+         </initialMarking>
+         <graphics>
+            <position x="82" y="398"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <arc id="96" source="95" target="5">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <name>
+         <text>FESystem</text>
+      </name>
+   </net>
+</pnml>

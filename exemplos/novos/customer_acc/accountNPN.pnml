@@ -1,0 +1,105 @@
+<pnml xmlns="RefNet">
+   <net id="netId1547931876435" type="RefNet">
+      <place id="1">
+         <name>
+            <graphics>
+               <offset x="0" y="-25"/>
+            </graphics>
+            <text>money</text>
+         </name>
+         <graphics>
+            <position x="174" y="53"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <transition id="3">
+         <uplink>
+            <graphics>
+               <offset x="31" y="-22"/>
+            </graphics>
+            <text>:deposit()</text>
+         </uplink>
+         <name>
+            <graphics>
+               <offset x="19" y="17"/>
+            </graphics>
+            <text>deposit</text>
+         </name>
+         <graphics>
+            <position x="305" y="55"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="5" source="3" target="1">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <transition id="9">
+         <uplink>
+            <graphics>
+               <offset x="36" y="-20"/>
+            </graphics>
+            <text>:amount()</text>
+         </uplink>
+         <name>
+            <graphics>
+               <offset x="12" y="19"/>
+            </graphics>
+            <text>amount</text>
+         </name>
+         <graphics>
+            <position x="66" y="53"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="10" source="9" target="1">
+         <type>
+            <text>test</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <transition id="13">
+         <uplink>
+            <graphics>
+               <offset x="48" y="1"/>
+            </graphics>
+            <text>:withdraw()</text>
+         </uplink>
+         <name>
+            <graphics>
+               <offset x="11" y="19"/>
+            </graphics>
+            <text>withdraw</text>
+         </name>
+         <graphics>
+            <position x="174" y="148"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="20" source="1" target="13">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <name>
+         <text>accountNPN</text>
+      </name>
+   </net>
+</pnml>

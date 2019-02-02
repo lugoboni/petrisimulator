@@ -1,0 +1,145 @@
+<pnml xmlns="RefNet">
+   <net id="netId1547925575888" type="RefNet">
+      <place id="2">
+         <name>
+            <graphics>
+               <offset x="37" y="0"/>
+            </graphics>
+            <text>empty</text>
+         </name>
+         <initialMarking>
+            <graphics>
+               <offset x="0" y="0"/>
+            </graphics>
+            <text>[]</text>
+         </initialMarking>
+         <graphics>
+            <position x="268" y="186"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <place id="5">
+         <name>
+            <graphics>
+               <offset x="24" y="0"/>
+            </graphics>
+            <text>full</text>
+         </name>
+         <graphics>
+            <position x="268" y="282"/>
+            <dimension x="20" y="20"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </place>
+      <transition id="7">
+         <uplink>
+            <graphics>
+               <offset x="-30" y="-1"/>
+            </graphics>
+            <text>:fill()</text>
+         </uplink>
+         <graphics>
+            <position x="225" y="230"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <transition id="8">
+         <uplink>
+            <graphics>
+               <offset x="38" y="-1"/>
+            </graphics>
+            <text>:empty()</text>
+         </uplink>
+         <graphics>
+            <position x="314" y="230"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="9" source="2" target="7">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="10" source="7" target="5">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="11" source="5" target="8">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <arc id="12" source="8" target="2">
+         <type>
+            <text>ordinary</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <transition id="16">
+         <uplink>
+            <graphics>
+               <offset x="36" y="-2"/>
+            </graphics>
+            <text>:isFull()</text>
+         </uplink>
+         <graphics>
+            <position x="269" y="340"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="17" source="5" target="16">
+         <type>
+            <text>test</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <transition id="18">
+         <uplink>
+            <graphics>
+               <offset x="44" y="-1"/>
+            </graphics>
+            <text>:isEmpty()</text>
+         </uplink>
+         <graphics>
+            <position x="268" y="123"/>
+            <dimension x="24" y="16"/>
+            <fill color="rgb(112,219,147)"/>
+            <line color="rgb(0,0,0)"/>
+         </graphics>
+      </transition>
+      <arc id="19" source="18" target="2">
+         <type>
+            <text>test</text>
+         </type>
+         <graphics>
+            <line color="rgb(0,0,0)" style="solid"/>
+         </graphics>
+      </arc>
+      <name>
+         <text>Bucket</text>
+      </name>
+   </net>
+</pnml>
