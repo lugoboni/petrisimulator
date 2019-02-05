@@ -290,7 +290,8 @@ def parse_arcs(root):
             nets_info[root[1]]['id'] + raw_arc_elements[i].attrib['id'],
             nets_info[root[1]]['id'] + raw_arc_elements[i].attrib['source'],
             nets_info[root[1]]['id'] + raw_arc_elements[i].attrib['target'],
-            make_mark_dict(raw_arc_elements[i])
+            make_mark_dict(raw_arc_elements[i]),
+            extract_feature(raw_arc_elements[i], 'type')
         )
         for i in range(0, len(raw_arc_elements))]
 
@@ -300,7 +301,8 @@ def parse_arcs(root):
                     [
                         ('id', arc[0]),
                         ('target', arc[2]),
-                        ('marking', arc[3])
+                        ('marking', arc[3]),
+                        ('type', arc[4])
                     ])
             )
 
@@ -309,7 +311,8 @@ def parse_arcs(root):
                     [
                         ('id', arc[0]),
                         ('target', arc[2]),
-                        ('marking', arc[3])
+                        ('marking', arc[3]),
+                        ('type', arc[4])
                     ])]
 
     arc_dicts[root[1]] = arc_dict
