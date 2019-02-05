@@ -104,13 +104,19 @@ init {
    }
 
    endl: do
-       ::atomic{ empty(gbChan) && S6 ?? [_,3] ->
+       ::atomic{ empty(gbChan) && S3 ?? [_,1]  && S1 > 0 ->
            sp(_pid,6);
-           S5 = S5 + 1;
+           recMsg(S3, nt, 1);
+           transpNetTok(S3,S6,nt);
+           gbChan !! 6-5, nt,1,S6;
+           sp(nt, 5);
+           printf("S6 Recebendo x \n\n");
+           S1 = S1 + 1;
+           S1 = S1 - 1;
            sp(_pid,1);
        }
 
-       ::atomic{ empty(gbChan) && S2 ?? [_,2] ->
+       ::atomic{ empty(gbChan) && S2 ?? [_,2]  && S5 > 1 ->
            sp(_pid,6);
            recMsg(S2, nt, 2);
            transpNetTok(S2,S3,nt);
@@ -118,45 +124,34 @@ init {
            sp(nt, 5);
            printf("S3 Recebendo x \n\n");
            S4 = S4 + 1;
+           S5 = S5 - 1;
            sp(_pid,1);
        }
 
-       ::atomic{ empty(gbChan) && S3 ?? [_,1] ->
-           sp(_pid,6);
-           recMsg(S3, nt, 1);
-           transpNetTok(S3,S6,nt);
-           gbChan !! 6-5, nt,1,S6;
-           sp(nt, 5);
-           printf("S6 Recebendo x \n\n");
-           S1++;
-           sp(_pid,1);
-       }
-
-       ::atomic{ S1 > 0 ->
+       ::atomic{ empty(gbChan) && S1 > 0 ->
            sp(_pid,6);
            nt = run ENr(S2); S2 !! nt, 15;
            printf("Produzindo net tokens \n\n");
-           nt = run ENr(S1); S1 !! nt, 15;
-           printf("Produzindo net tokens \n\n");
-           S1++;
+           S1 = S1 + 1;
+           S1 = S1 - 1;
            sp(_pid,1);
        }
 
-       ::atomic{ S4 > 1 ->
+       ::atomic{ empty(gbChan) && S6 ?? [_,3]  && S4 > 1 ->
            sp(_pid,6);
-           S4 = S4 + 1;
+           S5 = S5 + 1;
+           S4 = S4 - 1;
+           consNetTok(S6, 3);
+           printf(" Consuming x from S6 \n\n");
            sp(_pid,1);
        }
 
-       ::atomic{ S5 > 1 ->
+       ::atomic{ empty(gbChan) && S2 ?? [_,4]  && S4 > 1 ->
            sp(_pid,6);
            S4 = S4 + 1;
-           sp(_pid,1);
-       }
-
-       ::atomic{ empty(gbChan) && S2 ?? [_,4] ->
-           sp(_pid,6);
-           S4 = S4 + 1;
+           S4 = S4 - 1;
+           consNetTok(S2, 4);
+           printf(" Consuming x from S2 \n\n");
            sp(_pid,1);
        }
 
@@ -170,32 +165,75 @@ proctype ENENWorker (chan pc){
    byte W4 = 0;
    byte T = 0;
    endl: do
-       ::atomic { ->
-           T++;
+       ::atomic {gbChan ? _,eval(_pid),4,pc ->
+           printf("Transicao ENENWorker disparada\n\n");
+
+           W1 = W1 + 1;
+           W2 = W2 - 1;
        }
 
-       ::atomic {W4 > 0 ->
-           W0++;
+       ::atomic {empty(gbChan) && !pc ?? [eval(_pid),4] && W2 > 0 ->
+           pc !! _pid, 4;
+
+           printf("Transicao ENENWorker em espera\n\n");
+
        }
 
-       ::atomic {W1 > 0 ->
-           W2++;
+       ::atomic {gbChan ? _,eval(_pid),2,pc ->
+           printf("Transicao ENENWorker disparada\n\n");
+
+           W3 = W3 + 1;
+           W2 = W2 - 1;
        }
 
-       ::atomic {W3 > 0 ->
-           W4++;
+       ::atomic {empty(gbChan) && !pc ?? [eval(_pid),2] && W2 > 0 ->
+           pc !! _pid, 2;
+
+           printf("Transicao ENENWorker em espera\n\n");
+
        }
 
-       ::atomic {W2 > 0 ->
-           W3++;
+       ::atomic {gbChan ? _,eval(_pid),3,pc ->
+           printf("Transicao ENENWorker disparada\n\n");
+
+           W0 = W0 + 1;
+           W4 = W4 - 1;
        }
 
-       ::atomic {1 ->
-           T++;
+       ::atomic {empty(gbChan) && !pc ?? [eval(_pid),3] && W4 > 0 ->
+           pc !! _pid, 3;
+
+           printf("Transicao ENENWorker em espera\n\n");
+
        }
 
-       ::atomic {W0 > 0 && T > 0 ->
-           W1++;
+       ::atomic {empty(gbChan) && 1 ->
+           T = T + 1;
+       }
+
+       ::atomic {gbChan ? _,eval(_pid),1,pc ->
+           printf("Transicao ENENWorker disparada\n\n");
+
+           W4 = W4 + 1;
+           W3 = W3 - 1;
+       }
+
+       ::atomic {empty(gbChan) && !pc ?? [eval(_pid),1] && W3 > 0 ->
+           pc !! _pid, 1;
+
+           printf("Transicao ENENWorker em espera\n\n");
+
+       }
+
+       ::atomic {empty(gbChan) && W1 > 0 ->
+           W2 = W2 + 1;
+           W1 = W1 - 1;
+       }
+
+       ::atomic {empty(gbChan) && W0 > 0 && T > 0 ->
+           W1 = W1 + 1;
+           W0 = W0 - 1;
+           T = T - 1;
        }
 
    od

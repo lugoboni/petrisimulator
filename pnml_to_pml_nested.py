@@ -7,81 +7,84 @@ EXTENSION_FORMAT_ERROR_MESSAGE = "This script works only with pnml files"
 NON_CHANNEL_WITH_BLACK_DOT = "A black dot was found in channel place "
 NON_PROCESSED_NET_TOKEN = "A not processed net token was found"
 NON_PROCESSED_TOKEN = "A not processed token was found"
+DOWNLINK_NEEDS_INPUT_ARC = "A downlink transition needs an input arc"
+DOWNLINK_NEEDS_INPUT_CHANNEL_PLACE = "A downlink transition needs an input channel_place"
+COMMON_TOKEN_ON_CHANNEL_PLACE = "A channel place can not handle with a non net token"
 ELEMENT_NET_PREFIX = "EN"
 PROMELA_PRE_FUNCTIONS = [
-"#define NetPlace(d) chan d = [18] of {byte, byte}\n",
-"\n\n",
-"/*###############################################*/\n",
-"\n\n",
-"chan cha =[18] of {byte,byte}; hidden byte j, size_cha;\n",
-"\n\n",
-"/*###############################################*/\n",
-"\n\n",
-"inline consNetTok(c, p) {\n",
-"  do:: c ?? [eval(p),_] -> c ?? eval(p),_;\n",
-"    :: else -> break\n",
-"  od; skip }\n",
-"\n\n",
-"inline rmConf(l){\n",
-"  if :: pc ?? [eval(_pid),l] -> pc ?? eval(_pid),l\n",
-"     :: else fi\n",
-"}\n",
-"\n\n",
-"/*###############################################*/\n",
-"\n\n",
-"inline transpNetTok(ch, och, p){\n",
-"  do:: ch ?? [eval(p),_] ->\n",
-"       ch ?? eval(p),lt;\n",
-"       och !! p,lt;\n",
-"    :: else -> break\n",
-"  od; skip }\n",
-"\n\n",
-"/*###############################################*/\n",
-"hidden byte i;\n",
-"hidden unsigned nt:4,lt:4, nt1:4, lt1:4;\n",
-"\n\n",
-"inline recMsg(ch,f0,f1) {             /* ch - ordered \"channel, f0 - output variable, f1 - constant value */\n",
-"ch ! 0,f1;\n",
-"do :: ch ?? f0,f1;\n",
-"       if :: f0>0 ->   ch !  f0,f1; \n",
-"                       cha ! len(cha)+1,f0;\n",
-"          :: else -> break\n",
-"       fi\n",
-"od;\n",
-"\n\n",
-" /* select ( j : 1 .. size_cha); */\n",
-"\n\n",
-"    size_cha= len(cha);\n",
-"   j = 1;\n",
-"   do\n",
-"   :: j < size_cha -> j++\n",
-"   :: break\n",
-"   od\n",
-"\n\n",
-"cha ?? <eval(j),f0>;\n",
-"\n\n",
-" /* restoring the ordering of the input channel */\n",
-"  \n",
-"do :: len(cha)>0 -> \n",
-"   cha?_,nt1;\n",
-"   ch ?? eval(nt1),eval(f1);\n",
-"   ch !! nt1,f1;\n",
-"   :: else -> break\n",
-"od; \n",
-"\n\n",
-"ch ?? eval(f0),f1;   /* message selected by the receive */\n",
-"\n\n",
-"}\n",
-"\n\n",
-"/*###############################################*/\n",
-"\n\n",
-"#define sp(a,b)    set_priority(a,b)\n",
-"\n\n",
-"/*###############################################*/\n",
-"\n\n",
-"chan gbChan = [18] of {byte, byte, byte, chan};\n",
-"\n\n",
-"/*###############################################*/ \n"]
+    "#define NetPlace(d) chan d = [18] of {byte, byte}\n",
+    "\n\n",
+    "/*###############################################*/\n",
+    "\n\n",
+    "chan cha =[18] of {byte,byte}; hidden byte j, size_cha;\n",
+    "\n\n",
+    "/*###############################################*/\n",
+    "\n\n",
+    "inline consNetTok(c, p) {\n",
+    "  do:: c ?? [eval(p),_] -> c ?? eval(p),_;\n",
+    "    :: else -> break\n",
+    "  od; skip }\n",
+    "\n\n",
+    "inline rmConf(l){\n",
+    "  if :: pc ?? [eval(_pid),l] -> pc ?? eval(_pid),l\n",
+    "     :: else fi\n",
+    "}\n",
+    "\n\n",
+    "/*###############################################*/\n",
+    "\n\n",
+    "inline transpNetTok(ch, och, p){\n",
+    "  do:: ch ?? [eval(p),_] ->\n",
+    "       ch ?? eval(p),lt;\n",
+    "       och !! p,lt;\n",
+    "    :: else -> break\n",
+    "  od; skip }\n",
+    "\n\n",
+    "/*###############################################*/\n",
+    "hidden byte i;\n",
+    "hidden unsigned nt:4,lt:4, nt1:4, lt1:4;\n",
+    "\n\n",
+    "inline recMsg(ch,f0,f1) {             /* ch - ordered \"channel, f0 - output variable, f1 - constant value */\n",
+    "ch ! 0,f1;\n",
+    "do :: ch ?? f0,f1;\n",
+    "       if :: f0>0 ->   ch !  f0,f1; \n",
+    "                       cha ! len(cha)+1,f0;\n",
+    "          :: else -> break\n",
+    "       fi\n",
+    "od;\n",
+    "\n\n",
+    " /* select ( j : 1 .. size_cha); */\n",
+    "\n\n",
+    "    size_cha= len(cha);\n",
+    "   j = 1;\n",
+    "   do\n",
+    "   :: j < size_cha -> j++\n",
+    "   :: break\n",
+    "   od\n",
+    "\n\n",
+    "cha ?? <eval(j),f0>;\n",
+    "\n\n",
+    " /* restoring the ordering of the input channel */\n",
+    "  \n",
+    "do :: len(cha)>0 -> \n",
+    "   cha?_,nt1;\n",
+    "   ch ?? eval(nt1),eval(f1);\n",
+    "   ch !! nt1,f1;\n",
+    "   :: else -> break\n",
+    "od; \n",
+    "\n\n",
+    "ch ?? eval(f0),f1;   /* message selected by the receive */\n",
+    "\n\n",
+    "}\n",
+    "\n\n",
+    "/*###############################################*/\n",
+    "\n\n",
+    "#define sp(a,b)    set_priority(a,b)\n",
+    "\n\n",
+    "/*###############################################*/\n",
+    "\n\n",
+    "chan gbChan = [18] of {byte, byte, byte, chan};\n",
+    "\n\n",
+    "/*###############################################*/ \n"]
 
 nets = None
 nets_info = dict()
@@ -129,7 +132,8 @@ def plug_function_name_with_sync_transitions(transition_dict, sync_dict, transit
     for transition in transition_dict.keys():
         if transition_dict[transition]['uplink']:
             for uplink in transition_dict[transition]['uplink']:
-                name = uplink.split(":")[1]
+                name = uplink.split(
+                    " ")[1] if " " in uplink else uplink.split(":")[1]
                 if name in sync_dict.keys():
                     sync_dict[name]['transitions'].append(transition)
                     transition_label_dict[transition] = sync_dict[name]['label']
@@ -142,7 +146,8 @@ def plug_function_name_with_sync_transitions(transition_dict, sync_dict, transit
                     transition_label_dict[transition] = sync_dict[name]['label']
         if transition_dict[transition]['downlink']:
             for downlink in transition_dict[transition]['downlink']:
-                name = downlink.split(" ")[1] if " " in downlink else downlink.split(":")[1]
+                name = downlink.split(
+                    " ")[1] if " " in downlink else downlink.split(":")[1]
                 if name in sync_dict.keys():
                     sync_dict[name]['transitions'].append(transition)
                     transition_label_dict[transition] = sync_dict[name]['label']
@@ -207,6 +212,7 @@ def init(OUTPUT_FILENAME):
             arc_dicts,
             BASE_FILENAMES[0])
 
+
 def parse_transitions(root):
     transition_dict = dict()
     raw_transition_elements = list(root[0].iter(TRANSITION_TAG_MODEL_STRING))
@@ -255,7 +261,6 @@ def parse_places(root):
                 else:
                     marking[mark] = 1
         place[2] = marking
-
 
     """ place_dict = {'id'.value:{'name'; 'marking'; matrix_id}} """
     for place in parsed_place_elements:
@@ -357,213 +362,243 @@ def parse_connected_transitions(transition_dicts):
 def define_fire_conditions(transition_dict, arc_dict, place_dict):
     fire_conditions = dict()
     for transition_key in transition_dict.keys():
-        fire_conditions[transition_key] = list()
         arcs = get_arc_by_target(transition_key, arc_dict)
         uplink = transition_dict[transition_key]['uplink']
         downlink = transition_dict[transition_key]['downlink']
         create = transition_dict[transition_key]['create']
-        conditions = list()
         if transition_key in transition_label_dict.keys():
             label = transition_label_dict[transition_key]
         else:
             label = 0
+
+        fire_conditions[transition_key] = {
+            'arcs': arcs,
+            'create': create,
+            'label': label,
+            'conditions': list()
+        }
+
+        general_condition = list()
+        if uplink:
+            fire_uplink_condition = "gbChan ? _,eval(_pid),{0},pc".format(
+                label)
+            fire_conditions[transition_key]['conditions'].append(fire_uplink_condition)
+
+            condition = "empty(gbChan) && !pc ?? [eval(_pid),{0}]".format(
+                label)
+
+            general_condition.append(condition)
+
+        elif downlink:
+            if arcs:
+                origins = list()
+                for arc in arcs:
+                    if arc[0] in channel_places:
+                        origin = place_dict[arc[0]]['name'][0]
+                        origins.append(origin)
+
+                if origins:
+                    condition = "empty(gbChan) "
+                    for origin in origins:
+                        condition = condition + \
+                            "&& {0} ?? [_,{1}] ".format(origin, label)
+                    general_condition.append(condition)
+                else:
+                    raise Exception(DOWNLINK_NEEDS_INPUT_CHANNEL_PLACE)
+
+            else:
+                raise Exception(DOWNLINK_NEEDS_INPUT_ARC)
+
+        else:
+
+            condition = "empty(gbChan)"
+            general_condition.append(condition)
+
         if arcs:
             for arc in arcs:
                 if arc[1]['marking'].keys():
                     for mark in arc[1]['marking'].keys():
                         if mark not in net_tokens_list.keys():
                             origin = place_dict[arc[0]]['name'][0]
-                            condition = origin + " > " + str(arc[1]['marking'][mark])
-                            conditions.append(condition)
+                            condition = origin + " > " + \
+                                str(arc[1]['marking'][mark])
+                            general_condition.append(condition)
 
                         elif mark in net_tokens_list.keys() and arc[0] in channel_places:
-                            if uplink:
-
-                                condition = "!pc ?? [eval(_pid),{0}]".format(label)
-                                conditions.append(condition)
-                                fire_uplink_condition = "gbChan ? _,eval(_pid),{0},pc".format(
-                                    label)
-                                fire_conditions[transition_key].append((
-                                    arc[0],
-                                    uplink,
-                                    downlink,
-                                    create,
-                                    arc[1]['marking'],
-                                    label,
-                                    transition_key,
-                                    fire_uplink_condition))
-
-                            elif downlink:
-                                origin = place_dict[arc[0]]['name'][0]
-
-                                fire_downlink_condition = "empty(gbChan) && {0} ?? [_,{1}]".format(
-                                    origin, label)
-                                fire_conditions[transition_key].append((
-                                    arc[0],
-                                    uplink,
-                                    downlink,
-                                    create,
-                                    arc[1]['marking'],
-                                    label,
-                                    transition_key,
-                                    fire_downlink_condition))
-
-                            else:
-                                fire_condition = "empty(gbChan) && 1" #avaliar
-                                fire_conditions[transition_key].append((
-                                    arc[0],
-                                    uplink,
-                                    downlink,
-                                    create,
-                                    arc[1]['marking'],
-                                    label,
-                                    transition_key,
-                                    fire_condition))                            
-
+                            pass  # avaliar
+                        elif mark not in net_tokens_list.keys() and arc[0] in channel_places:
+                            raise Exception(COMMON_TOKEN_ON_CHANNEL_PLACE)
                         else:
                             raise Exception(NON_PROCESSED_TOKEN)
+
                 else:
                     if arc[0] not in channel_places:
                         origin = place_dict[arc[0]]['name'][0]
                         condition = origin + " > " + '0'
-                        conditions.append(condition)
+                        general_condition.append(condition)
 
                     else:
-                        if uplink:
-                            condition = "empty(gbChan) && !pc ?? [eval(_pid),{0}]".format(label)
-                            conditions.append(condition)
-                            fire_uplink_condition = "gbChan ? _,eval(_pid),{0},pc".format(
-                                label)
-                            fire_conditions[transition_key].append((
-                                arc[0],
-                                uplink,
-                                downlink,
-                                create,
-                                arc[1]['marking'],
-                                label,
-                                transition_key,
-                                fire_uplink_condition))
+                        general_condition.append("1")  # avaliar
 
-                        elif downlink:
-                            origin = place_dict[arc[0]]['name'][0]
-
-                            condition = "empty(gbChan) && {0} ?? [_,{1}]".format(
-                                origin, label)
-                            conditions.append(condition)
-
-                        else:
-                            fire_condition = "empty(gbChan) && 1" #avaliar
-                            fire_conditions[transition_key].append((
-                                arc[0],
-                                uplink,
-                                downlink,
-                                create,
-                                arc[1]['marking'],
-                                label,
-                                transition_key,
-                                fire_condition))   
-
-        else: #If there's no arc inciding on the transition
-            fire_uplink_condition = "1"
-            fire_conditions[transition_key].append((
-                None,
-                uplink,
-                downlink,
-                create,
-                None,
-                label,
-                transition_key,
-                fire_uplink_condition)) 
+        else:  # If there's no arc inciding on the transition
+            condition = "1"
+            general_condition.append(condition)
 
         fire_condition = ""
-        for condition in conditions:
-            if condition == conditions[-1]:
-                fire_condition = fire_condition + condition
-            else:
-                fire_condition = fire_condition + condition + " && "
-        fire_conditions[transition_key].append((
-            None,
-            uplink,
-            downlink,
-            create,
-            None,
-            label,
-            fire_condition))  
+        for condition in general_condition:
+            fire_condition = fire_condition + " && " + condition
+        fire_condition = fire_condition[4:]
+
+        fire_conditions[transition_key]['conditions'].append(fire_condition)
 
     return fire_conditions
 
 
+def test_arcs_channel_place(arcs):
+    for arc in arcs:
+        if arc[0] in channel_places:
+            return True
+
+
 def define_fire_actions(fire_conditions, arc_dict, place_dict, transition_dict, net_name):
-    fire_actions = dict()
+    fire_actions = list()
     for transition in transition_dict.keys():
-        for condition in fire_conditions[transition]:
+        for condition in fire_conditions[transition]['conditions']:
             sentences = list()
-            print(arc_dict.keys())
-            if transition in arc_dict.keys():
-                for arc in arc_dict[transition]:
-                    if arc not in arc_dict.keys():                
-                        dest_place = place_dict[arc['target']]['name'][0]
-                        if condition[3]: # if create
-                            for new_instance in condition[3]:
+
+            if "!pc" in condition:
+                wait_sentences = list()
+                sentence = "pc !! _pid, {};\n".format(fire_conditions[transition]['label'])
+                wait_sentences.append(sentence)
+                sentence = "printf(\"Transicao EN" + \
+                    "{} em espera".format(net_name) + "\\n\\n\");\n"
+                wait_sentences.append(sentence)
+                fire_actions.append([condition, wait_sentences])
+                continue
+
+            elif "_,eval(_pid)" in condition:
+                sentence = "printf(\"Transicao EN" + \
+                    "{} disparada".format(net_name) + "\\n\\n\");\n"
+                sentences.append(sentence)
+
+            for arc in arc_dict[transition]:
+                dest_place = place_dict[arc['target']]['name'][0]
+                if arc['target'] in channel_places:
+                    if arc['marking']:
+                        if fire_conditions[transition]['create']:
+                            for new_instance in fire_conditions[transition]['create']:
                                 net = new_instance.split("()")[0][-1]
-                                #checar mark do arco
-                                element_net_name = ELEMENT_NET_PREFIX + str(net)
-                                sentence = "nt = run {1}({0}); {0} !! nt, 15;".format(dest_place, element_net_name)
-                                sentence.format(dest_place, element_net_name)
-                                sentences.append(sentence)
-                                sentence = "printf(\"Produzindo net tokens \\n\\n\");"
-                                sentences.append(sentence)
-
-                        if condition[0]:
-                            origin_name = place_dict[condition[0]]['name'][0]
-                            if condition[0] in channel_places and arc['target'] in channel_places:
-                                sentence = "recMsg({0}, nt, {1});".format(origin_name, condition[5])
-                                sentences.append(sentence)
-                                sentence = "transpNetTok({0},{1},nt);".format(origin_name, dest_place)
-                                sentences.append(sentence)
-                                sentence = "gbChan !! 6-5, nt,1,{};".format(dest_place)
-                                sentences.append(sentence)
-                                sentence = "sp(nt, 5);"
-                                sentences.append(sentence)
-                                sentence = "printf(\"{0} Recebendo {1} \\n\\n\");".format(
-                                    dest_place,
-                                    condition[4].keys()[0]) #sempre o primeiro?
-                                sentences.append(sentence)
-
-                            if condition[0] not in channel_places and "!pc" not in condition[-1]:
-                                if condition[4].keys():
-                                    for mark in condition[4].keys():
-                                        if mark not in net_tokens_list.keys():
-                                            sentence = "{0} = {0} - {1};".format(origin_name, condition[4][mark])
-                                            sentences.append(sentence)
-                                            break
+                                token = new_instance.split("()")[0][0]
+                                if token in arc['marking']:
+                                    # checar mark do arco
+                                    element_net_name = ELEMENT_NET_PREFIX + \
+                                        str(net)
+                                    sentence = "nt = run {1}({0}); {0} !! nt, 15;".format(
+                                        dest_place, element_net_name)
+                                    sentence.format(
+                                        dest_place, element_net_name)
+                                    sentences.append(sentence)
+                                    sentence = "printf(\"Produzindo net tokens \\n\\n\");"
+                                    sentences.append(sentence)
                                 else:
-                                    sentence = "{0}--;".format(origin_name)
-                                    sentences.append(sentence)               
+                                    pass
+                    else:
+                        pass
 
-                        if arc['target'] not in channel_places and "!pc" not in condition[-1]:
-                            if arc['marking'].keys():
-                                for mark in arc['marking'].keys():
-                                    if mark not in net_tokens_list.keys():
-                                        sentence = "{0} = {0} + {1};".format(dest_place, arc['marking'][mark])
-                                        sentences.append(sentence)
-                                        break
+                    if test_arcs_channel_place(fire_conditions[transition]['arcs']):
+                        for origin_arc in fire_conditions[transition]['arcs']:
+                            if origin_arc[0] in channel_places:
+                                origin_name = place_dict[origin_arc[0]
+                                                         ]['name'][0]
+
+                                if origin_arc[1]['marking']:
+                                    if arc['marking']:
+                                        for mark in origin_arc[1]['marking']:
+                                            if mark in arc['marking'] and mark in net_tokens_list:
+                                                sentence = "recMsg({0}, nt, {1});".format(
+                                                    origin_name, fire_conditions[transition]['label'])
+                                                sentences.append(sentence)
+                                                sentence = "transpNetTok({0},{1},nt);".format(
+                                                    origin_name, dest_place)
+                                                sentences.append(sentence)
+                                                sentence = "gbChan !! 6-5, nt,1,{};".format(
+                                                    dest_place)
+                                                sentences.append(sentence)
+                                                sentence = "sp(nt, 5);"
+                                                sentences.append(sentence)
+                                                sentence = "printf(\"{0} Recebendo {1} \\n\\n\");".format(
+                                                    dest_place,
+                                                    mark)
+                                                sentences.append(sentence)
+                                            else:
+                                                pass
+                                    else:
+                                        for mark in origin_arc[1]['marking']:
+                                            if mark in net_tokens_list:
+                                                sentence = "consNetTok({0}, {1});".format(
+                                                    origin_name, fire_conditions[transition]['label'])
+                                                sentences.append(sentence)
+                                                sentence = "printf(\" Consuming {1} from {0} \\n\\n\");".format(
+                                                    origin_name, mark)
+                                                sentences.append(sentence)
+
+                                else:
+                                    if arc['marking']:
+                                        pass
+
+                                    else:
+                                        pass
+
+                    else:
+                        pass
+
+                elif arc['target'] not in channel_places and "!pc" not in condition:
+
+                    if arc['marking'].keys():
+                        for mark in arc['marking'].keys():
+                            if mark not in net_tokens_list.keys():
+                                sentence = "{0} = {0} + {1};".format(
+                                    dest_place, arc['marking'][mark])
+                                sentences.append(sentence)
+                    else:
+                        sentence = "{0} = {0} + 1;".format(dest_place)
+                        sentences.append(sentence)
+
+                    for origin_arc in fire_conditions[transition]['arcs']:
+                        origin_name = place_dict[origin_arc[0]]['name'][0]
+                        if origin_arc[0] in channel_places:
+                            if origin_arc[1]['marking']:
+                                for mark in origin_arc[1]['marking']:
+                                    if mark in net_tokens_list:
+                                        transp = False
+                                        for arc in arc_dict[transition]:
+                                            if mark in arc['marking']:
+                                                transp = True
+                                                break
+                                        if not transp:
+                                            sentence = "consNetTok({0}, {1});".format(
+                                                origin_name, fire_conditions[transition]['label'])
+                                            sentences.append(sentence)
+                                            sentence = "printf(\" Consuming {1} from {0} \\n\\n\");".format(
+                                                origin_name, mark)
+                                            sentences.append(sentence)
+                                        else:
+                                            pass
+                                    else:
+                                        pass
                             else:
-                                sentence = "{0}++;".format(dest_place)
+                                pass
+                        else:
+                            if origin_arc[1]['marking']:
+                                for mark in origin_arc[1]['marking']:
+                                    sentence = "{0} = {0} - {1};".format(
+                                        origin_name, origin_arc[1]['marking'][mark])
+                                    sentences.append(sentence)
+                            else:
+                                sentence = "{0} = {0} - 1;".format(origin_name)
                                 sentences.append(sentence)
 
-                        if "!pc" in condition[-1]:
-                            sentence = "pc !! _pid, {};\n".format(condition[5])
-                            sentences.append(sentence)
-                            sentence = "printf(\"Transicao EN"+"{} em espera".format(net_name)+"\\n\\n\");\n"
-                            sentences.append(sentence)
-
-                        if "_,eval(_pid)" in condition[-1]:
-                            sentence = "printf(\"Transicao EN"+"{} disparada".format(net_name)+"\\n\\n\");\n"
-                            sentences.append(sentence)                
-            else:
-                sentences.append("-+-+-+-+-+-+-+-+-+-+-+-+-=-+-+-+")
-            fire_actions[condition[-1]] = sentences
+            fire_actions.append([condition, sentences])
 
     return fire_actions
 
@@ -575,7 +610,8 @@ def create_initial_marking(place_dict):
             for mark in place_dict[key]['marking'].keys():
                 if mark not in net_tokens_list.keys():
                     raise Exception(NON_PROCESSED_TOKEN)
-            create_net_place = "NetPlace({});\n".format(place_dict[key]['name'][0])
+            create_net_place = "NetPlace({});\n".format(
+                place_dict[key]['name'][0])
             initial_marking.append(create_net_place)
         else:
             if place_dict[key]['marking'].keys():
@@ -591,7 +627,6 @@ def create_initial_marking(place_dict):
                     0)
                 initial_marking.append(marking)
 
-
     return(initial_marking)
 
 
@@ -602,13 +637,13 @@ def generate_promela_code():
     for net in nets_info.keys():
         initial_marking = create_initial_marking(place_dicts[net])
         conditions = define_fire_conditions(
-            transition_dicts[net], 
-            arc_dicts[net], 
+            transition_dicts[net],
+            arc_dicts[net],
             place_dicts[net])
         actions = define_fire_actions(
-            conditions, 
-            arc_dicts[net], 
-            place_dicts[net], 
+            conditions,
+            arc_dicts[net],
+            place_dicts[net],
             transition_dicts[net],
             net)
         if net in system_net:
@@ -619,11 +654,11 @@ def generate_promela_code():
             f.write("       printf(\"SN setting initial marking\\n\\n\");\n")
             f.write("   }\n\n")
             f.write("   endl: do\n")
-            for condition in actions.keys():
-                f.write("       ::atomic{"+" {} ->\n".format(condition))
+            for action in actions:
+                f.write("       ::atomic{" + " {} ->\n".format(action[0]))
                 f.write("           sp(_pid,6);\n")
-                for action in actions[condition]:
-                    f.write("           {}\n".format(action))
+                for production in action[1]:
+                    f.write("           {}\n".format(production))
                 f.write("           sp(_pid,1);\n")
                 f.write("       }\n\n")
             f.write("   od\n")
@@ -635,10 +670,10 @@ def generate_promela_code():
             for mark in initial_marking:
                 f.write("   {}".format(mark))
             f.write("   endl: do\n")
-            for condition in actions.keys():
-                f.write("       ::atomic {"+"{} ->\n".format(condition))
-                for action in actions[condition]:
-                    f.write("           {}\n".format(action))
+            for action in actions:
+                f.write("       ::atomic {" + "{} ->\n".format(action[0]))
+                for production in action[1]:
+                    f.write("           {}\n".format(production))
                 f.write("       }\n\n")
             f.write("   od\n")
             f.write("}\n\n")
@@ -646,8 +681,8 @@ def generate_promela_code():
     f.close()
 
 
-
-roots, OUTPUT_FILENAME, transition_dicts, place_dicts, arc_dicts, system_net = init(OUTPUT_FILENAME)
+roots, OUTPUT_FILENAME, transition_dicts, place_dicts, arc_dicts, system_net = init(
+    OUTPUT_FILENAME)
 
 for root in roots:
     parse_transitions(root)
