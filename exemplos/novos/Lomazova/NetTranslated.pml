@@ -166,7 +166,7 @@ proctype ENENWorker (chan pc){
    byte T = 0;
    endl: do
        ::atomic {gbChan ? _,eval(_pid),4,pc ->
-           printf("Transicao ENENWorker disparada\n\n");
+           printf("Transicao netId15486760430633 disparada\n\n");
 
            W1 = W1 + 1;
            W2 = W2 - 1;
@@ -175,12 +175,12 @@ proctype ENENWorker (chan pc){
        ::atomic {empty(gbChan) && !pc ?? [eval(_pid),4] && W2 > 0 ->
            pc !! _pid, 4;
 
-           printf("Transicao ENENWorker em espera\n\n");
+           printf("Transicao netId15486760430633 em espera\n\n");
 
        }
 
        ::atomic {gbChan ? _,eval(_pid),2,pc ->
-           printf("Transicao ENENWorker disparada\n\n");
+           printf("Transicao netId15486760430635 disparada\n\n");
 
            W3 = W3 + 1;
            W2 = W2 - 1;
@@ -189,12 +189,12 @@ proctype ENENWorker (chan pc){
        ::atomic {empty(gbChan) && !pc ?? [eval(_pid),2] && W2 > 0 ->
            pc !! _pid, 2;
 
-           printf("Transicao ENENWorker em espera\n\n");
+           printf("Transicao netId15486760430635 em espera\n\n");
 
        }
 
        ::atomic {gbChan ? _,eval(_pid),3,pc ->
-           printf("Transicao ENENWorker disparada\n\n");
+           printf("Transicao netId154867604306325 disparada\n\n");
 
            W0 = W0 + 1;
            W4 = W4 - 1;
@@ -203,7 +203,7 @@ proctype ENENWorker (chan pc){
        ::atomic {empty(gbChan) && !pc ?? [eval(_pid),3] && W4 > 0 ->
            pc !! _pid, 3;
 
-           printf("Transicao ENENWorker em espera\n\n");
+           printf("Transicao netId154867604306325 em espera\n\n");
 
        }
 
@@ -212,7 +212,7 @@ proctype ENENWorker (chan pc){
        }
 
        ::atomic {gbChan ? _,eval(_pid),1,pc ->
-           printf("Transicao ENENWorker disparada\n\n");
+           printf("Transicao netId154867604306321 disparada\n\n");
 
            W4 = W4 + 1;
            W3 = W3 - 1;
@@ -221,7 +221,7 @@ proctype ENENWorker (chan pc){
        ::atomic {empty(gbChan) && !pc ?? [eval(_pid),1] && W3 > 0 ->
            pc !! _pid, 1;
 
-           printf("Transicao ENENWorker em espera\n\n");
+           printf("Transicao netId154867604306321 em espera\n\n");
 
        }
 

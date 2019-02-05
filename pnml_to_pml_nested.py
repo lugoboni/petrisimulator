@@ -470,122 +470,151 @@ def define_fire_actions(fire_conditions, arc_dict, place_dict, transition_dict, 
                 wait_sentences = list()
                 sentence = "pc !! _pid, {};\n".format(fire_conditions[transition]['label'])
                 wait_sentences.append(sentence)
-                sentence = "printf(\"Transicao EN" + \
-                    "{} em espera".format(net_name) + "\\n\\n\");\n"
+                sentence = "printf(\"Transicao " + \
+                    "{} em espera".format(transition) + "\\n\\n\");\n"
                 wait_sentences.append(sentence)
                 fire_actions.append([condition, wait_sentences])
                 continue
 
             elif "_,eval(_pid)" in condition:
-                sentence = "printf(\"Transicao EN" + \
-                    "{} disparada".format(net_name) + "\\n\\n\");\n"
+                sentence = "printf(\"Transicao " + \
+                    "{} disparada".format(transition) + "\\n\\n\");\n"
                 sentences.append(sentence)
-
-            for arc in arc_dict[transition]:
-                dest_place = place_dict[arc['target']]['name'][0]
-                if arc['target'] in channel_places:
-                    if arc['marking']:
-                        if fire_conditions[transition]['create']:
-                            for new_instance in fire_conditions[transition]['create']:
-                                net = new_instance.split("()")[0][-1]
-                                token = new_instance.split("()")[0][0]
-                                if token in arc['marking']:
-                                    # checar mark do arco
-                                    element_net_name = ELEMENT_NET_PREFIX + \
-                                        str(net)
-                                    sentence = "nt = run {1}({0}); {0} !! nt, 15;".format(
-                                        dest_place, element_net_name)
-                                    sentence.format(
-                                        dest_place, element_net_name)
-                                    sentences.append(sentence)
-                                    sentence = "printf(\"Produzindo net tokens \\n\\n\");"
-                                    sentences.append(sentence)
-                                else:
-                                    pass
-                    else:
-                        pass
-
-                    if test_arcs_channel_place(fire_conditions[transition]['arcs']):
-                        for origin_arc in fire_conditions[transition]['arcs']:
-                            if origin_arc[0] in channel_places:
-                                origin_name = place_dict[origin_arc[0]
-                                                         ]['name'][0]
-
-                                if origin_arc[1]['marking']:
-                                    if arc['marking']:
-                                        for mark in origin_arc[1]['marking']:
-                                            if mark in arc['marking'] and mark in net_tokens_list:
-                                                sentence = "recMsg({0}, nt, {1});".format(
-                                                    origin_name, fire_conditions[transition]['label'])
-                                                sentences.append(sentence)
-                                                sentence = "transpNetTok({0},{1},nt);".format(
-                                                    origin_name, dest_place)
-                                                sentences.append(sentence)
-                                                sentence = "gbChan !! 6-5, nt,1,{};".format(
-                                                    dest_place)
-                                                sentences.append(sentence)
-                                                sentence = "sp(nt, 5);"
-                                                sentences.append(sentence)
-                                                sentence = "printf(\"{0} Recebendo {1} \\n\\n\");".format(
-                                                    dest_place,
-                                                    mark)
-                                                sentences.append(sentence)
-                                            else:
-                                                pass
+            if arc_dict[transition]:
+                for arc in arc_dict[transition]:
+                    dest_place = place_dict[arc['target']]['name'][0]
+                    if arc['target'] in channel_places:
+                        if arc['marking']:
+                            if fire_conditions[transition]['create']:
+                                for new_instance in fire_conditions[transition]['create']:
+                                    net = new_instance.split("()")[0][-1]
+                                    token = new_instance.split("()")[0][0]
+                                    if token in arc['marking']:
+                                        # checar mark do arco
+                                        element_net_name = ELEMENT_NET_PREFIX + \
+                                            str(net)
+                                        sentence = "nt = run {1}({0}); {0} !! nt, 15;".format(
+                                            dest_place, element_net_name)
+                                        sentence.format(
+                                            dest_place, element_net_name)
+                                        sentences.append(sentence)
+                                        sentence = "printf(\"Produzindo net tokens \\n\\n\");"
+                                        sentences.append(sentence)
                                     else:
-                                        for mark in origin_arc[1]['marking']:
-                                            if mark in net_tokens_list:
+                                        pass
+                        else:
+                            pass
+
+                        if test_arcs_channel_place(fire_conditions[transition]['arcs']):
+                            for origin_arc in fire_conditions[transition]['arcs']:
+                                if origin_arc[0] in channel_places:
+                                    origin_name = place_dict[origin_arc[0]
+                                                             ]['name'][0]
+
+                                    if origin_arc[1]['marking']:
+                                        if arc['marking']:
+                                            for mark in origin_arc[1]['marking']:
+                                                if mark in arc['marking'] and mark in net_tokens_list:
+                                                    sentence = "recMsg({0}, nt, {1});".format(
+                                                        origin_name, fire_conditions[transition]['label'])
+                                                    sentences.append(sentence)
+                                                    sentence = "transpNetTok({0},{1},nt);".format(
+                                                        origin_name, dest_place)
+                                                    sentences.append(sentence)
+                                                    sentence = "gbChan !! 6-5, nt,1,{};".format(
+                                                        dest_place)
+                                                    sentences.append(sentence)
+                                                    sentence = "sp(nt, 5);"
+                                                    sentences.append(sentence)
+                                                    sentence = "printf(\"{0} Recebendo {1} \\n\\n\");".format(
+                                                        dest_place,
+                                                        mark)
+                                                    sentences.append(sentence)
+                                                else:
+                                                    pass
+                                        else:
+                                            for mark in origin_arc[1]['marking']:
+                                                if mark in net_tokens_list:
+                                                    sentence = "consNetTok({0}, {1});".format(
+                                                        origin_name, fire_conditions[transition]['label'])
+                                                    sentences.append(sentence)
+                                                    sentence = "printf(\" Consuming {1} from {0} \\n\\n\");".format(
+                                                        origin_name, mark)
+                                                    sentences.append(sentence)
+
+                                    else:
+                                        if arc['marking']:
+                                            pass
+
+                                        else:
+                                            pass
+
+                        else:
+                            pass
+
+                    elif arc['target'] not in channel_places and "!pc" not in condition:
+
+                        if arc['marking'].keys():
+                            for mark in arc['marking'].keys():
+                                if mark not in net_tokens_list.keys():
+                                    sentence = "{0} = {0} + {1};".format(
+                                        dest_place, arc['marking'][mark])
+                                    sentences.append(sentence)
+                        else:
+                            sentence = "{0} = {0} + 1;".format(dest_place)
+                            sentences.append(sentence)
+
+                        for origin_arc in fire_conditions[transition]['arcs']:
+                            origin_name = place_dict[origin_arc[0]]['name'][0]
+                            if origin_arc[0] in channel_places:
+                                if origin_arc[1]['marking']:
+                                    for mark in origin_arc[1]['marking']:
+                                        if mark in net_tokens_list:
+                                            transp = False
+                                            for arc in arc_dict[transition]:
+                                                if mark in arc['marking']:
+                                                    transp = True
+                                                    break
+                                            if not transp:
                                                 sentence = "consNetTok({0}, {1});".format(
                                                     origin_name, fire_conditions[transition]['label'])
                                                 sentences.append(sentence)
                                                 sentence = "printf(\" Consuming {1} from {0} \\n\\n\");".format(
                                                     origin_name, mark)
                                                 sentences.append(sentence)
-
+                                            else:
+                                                pass
+                                        else:
+                                            pass
                                 else:
-                                    if arc['marking']:
-                                        pass
-
-                                    else:
-                                        pass
-
-                    else:
-                        pass
-
-                elif arc['target'] not in channel_places and "!pc" not in condition:
-
-                    if arc['marking'].keys():
-                        for mark in arc['marking'].keys():
-                            if mark not in net_tokens_list.keys():
-                                sentence = "{0} = {0} + {1};".format(
-                                    dest_place, arc['marking'][mark])
-                                sentences.append(sentence)
-                    else:
-                        sentence = "{0} = {0} + 1;".format(dest_place)
-                        sentences.append(sentence)
-
+                                    pass
+                            else:
+                                if origin_arc[1]['marking']:
+                                    for mark in origin_arc[1]['marking']:
+                                        sentence = "{0} = {0} - {1};".format(
+                                            origin_name, origin_arc[1]['marking'][mark])
+                                        sentences.append(sentence)
+                                else:
+                                    sentence = "{0} = {0} - 1;".format(origin_name)
+                                    sentences.append(sentence)
+            else:
+                if test_arcs_channel_place(fire_conditions[transition]['arcs']):
                     for origin_arc in fire_conditions[transition]['arcs']:
                         origin_name = place_dict[origin_arc[0]]['name'][0]
                         if origin_arc[0] in channel_places:
                             if origin_arc[1]['marking']:
                                 for mark in origin_arc[1]['marking']:
                                     if mark in net_tokens_list:
-                                        transp = False
-                                        for arc in arc_dict[transition]:
-                                            if mark in arc['marking']:
-                                                transp = True
-                                                break
-                                        if not transp:
-                                            sentence = "consNetTok({0}, {1});".format(
-                                                origin_name, fire_conditions[transition]['label'])
-                                            sentences.append(sentence)
-                                            sentence = "printf(\" Consuming {1} from {0} \\n\\n\");".format(
-                                                origin_name, mark)
-                                            sentences.append(sentence)
-                                        else:
-                                            pass
+                                        sentence = "consNetTok({0}, {1});".format(
+                                            origin_name, fire_conditions[transition]['label'])
+                                        sentences.append(sentence)
+                                        sentence = "printf(\" Consuming {1} from {0} \\n\\n\");".format(
+                                            origin_name, mark)
+                                        sentences.append(sentence)
+
                                     else:
-                                        pass
+                                        raise Exception(NON_CHANNEL_WITH_BLACK_DOT)
+
                             else:
                                 pass
                         else:
@@ -597,6 +626,7 @@ def define_fire_actions(fire_conditions, arc_dict, place_dict, transition_dict, 
                             else:
                                 sentence = "{0} = {0} - 1;".format(origin_name)
                                 sentences.append(sentence)
+
 
             fire_actions.append([condition, sentences])
 

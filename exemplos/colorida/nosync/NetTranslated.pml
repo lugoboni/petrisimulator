@@ -95,17 +95,17 @@ proctype ENA (chan pc){
    byte pa2 = 0;
    byte pa1 = 1;
    endl: do
-       ::atomic {pa1 > 0 && empty(gbChan) && !pc ?? [eval(_pid),1] ->
+       ::atomic {gbChan ? _,eval(_pid),1,pc ->
+           printf("Transicao 0 disparada\n\n");
+
+           pa2 = pa2 + 1;
+           pa1 = pa1 - 1;
+       }
+
+       ::atomic {empty(gbChan) && !pc ?? [eval(_pid),1] && pa1 > 0 ->
            pc !! _pid, 1;
 
            printf("Transicao ENA em espera\n\n");
-
-       }
-
-       ::atomic {gbChan ? _,eval(_pid),1,pc ->
-           pa1--;
-           pa2++;
-           printf("Transicao ENA disparada\n\n");
 
        }
 
@@ -119,13 +119,13 @@ proctype ENB (chan pc){
    byte pb2 = 0;
    endl: do
        ::atomic {gbChan ? _,eval(_pid),2,pc ->
-           pb1--;
-           pb2++;
-           printf("Transicao ENB disparada\n\n");
+           printf("Transicao 0 disparada\n\n");
 
+           pb2 = pb2 + 1;
+           pb1 = pb1 - 1;
        }
 
-       ::atomic {pb1 > 0 && empty(gbChan) && !pc ?? [eval(_pid),2] ->
+       ::atomic {empty(gbChan) && !pc ?? [eval(_pid),2] && pb1 > 0 ->
            pc !! _pid, 2;
 
            printf("Transicao ENB em espera\n\n");
@@ -137,11 +137,10 @@ proctype ENB (chan pc){
 
 /*###############################################*/
 
-byte SN4 = 2;
-byte SN3 = 0;
-NetPlace(SN2);
-byte SN0 = 2;
 NetPlace(SN1);
+byte SN0 = 2;
+NetPlace(SN2);
+byte SN3 = 0;
 init {
 
    atomic{
@@ -149,32 +148,33 @@ init {
    }
 
    endl: do
-       ::atomic{ empty(gbChan) && SN1 ?? [_,1] ->
-           sp(_pid,6);
-           SN3++;
-           recMsg(SN1, nt, 1);
-           transpNetTok(SN1,SN2,nt);
-           gbChan !! 6-5, nt,1,SN2;
-           sp(nt, 5);
-           printf("SN2 Recebendo a \n\n");
-           sp(_pid,1);
-       }
-
-       ::atomic{ empty(gbChan) && SN1 ?? [_,2] && SN4 > 1SN4 > 1 ->
-           sp(_pid,6);
-           SN4 = SN4 - 1;
-           SN4 = SN4 - 1;
-           SN4 = SN4 + 1;
-           sp(_pid,1);
-       }
-
-       ::atomic{ SN0 > 0 && empty(gbChan) ->
+       ::atomic{ empty(gbChan) && SN0 > 0 ->
            sp(_pid,6);
            nt = run ENA(SN1); SN1 !! nt, 15;
            printf("Produzindo net tokens \n\n");
            nt = run ENB(SN1); SN1 !! nt, 15;
            printf("Produzindo net tokens \n\n");
-           SN0--;
+           sp(_pid,1);
+       }
+
+       ::atomic{ empty(gbChan) && SN1 ?? [_,2]  ->
+           sp(_pid,6);
+           recMsg(SN1, nt, 2);
+           transpNetTok(SN1,SN2,nt);
+           gbChan !! 6-5, nt,1,SN2;
+           sp(nt, 5);
+           printf("SN2 Recebendo b \n\n");
+           sp(_pid,1);
+       }
+
+       ::atomic{ empty(gbChan) && SN1 ?? [_,1]  ->
+           sp(_pid,6);
+           SN3 = SN3 + 1;
+           recMsg(SN1, nt, 1);
+           transpNetTok(SN1,SN2,nt);
+           gbChan !! 6-5, nt,1,SN2;
+           sp(nt, 5);
+           printf("SN2 Recebendo a \n\n");
            sp(_pid,1);
        }
 
